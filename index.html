@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#08050e">
-<title>Royal Slot 777 — Home</title>
+<title>Royal Slot 777 — Player Profile</title>
 <style>
 :root {
   --bg-main: #08050e;
@@ -15,6 +15,8 @@
   --gold-primary: #ffd45c;
   --gold-gradient: linear-gradient(135deg, #ffe79a 0%, #ffd45c 50%, #cca12e 100%);
   --gold-glow: 0 0 25px rgba(255, 212, 92, 0.25);
+  --green-win: #38ef7d;
+  --red-alert: #ff4e6a;
   --text-main: #f5f3f7;
   --text-muted: #a09aa9;
   --radius-sm: 10px;
@@ -34,11 +36,11 @@ body{
   -webkit-font-smoothing: antialiased;
 }
 a{text-decoration:none;color:inherit}
-button,input{font:inherit}
+button,input,select{font:inherit}
 
 .container{width:min(1140px,92%);margin:auto}
 
-/* 1. Header / Navbar */
+/* Header */
 header{
   position:sticky;
   top:0;
@@ -52,14 +54,10 @@ header{
 .logo{
   font-size:20px;
   font-weight:900;
-  letter-spacing: 0.5px;
   color:var(--gold-primary);
   text-shadow: 0 0 15px rgba(255,212,92,0.3);
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
-nav ul{display:flex;list-style:none;gap:22px}
+nav ul{display:flex;list-style:none;gap:22px;align-items:center}
 nav a{
   font-size:13px;
   font-weight:600;
@@ -69,7 +67,7 @@ nav a{
   position: relative;
 }
 nav a:hover, nav a.active{color:#fff}
-nav a:hover::after, nav a.active::after{
+nav a.active::after{
   content:'';
   position:absolute;
   bottom:0;
@@ -80,60 +78,113 @@ nav a:hover::after, nav a.active::after{
   box-shadow: 0 0 8px var(--gold-primary);
 }
 
-/* 2. Hero Section */
-.hero{
-  min-height: 480px;
+/* Profile Hero Card */
+.profile-banner{
+  padding: 40px 0 25px;
+}
+.profile-hero{
+  background: linear-gradient(145deg, #1e1333 0%, #0f0a1a 100%);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 32px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+  box-shadow: 0 20px 40px -15px rgba(0,0,0,0.6);
   position: relative;
-  background:
-    radial-gradient(circle at 50% 30%, rgba(138, 77, 255, 0.22), transparent 60%),
-    radial-gradient(circle at 50% 80%, rgba(255, 212, 92, 0.1), transparent 50%),
-    linear-gradient(180deg, rgba(8,5,14,0.2) 0%, var(--bg-main) 100%);
-  padding: 60px 0;
+  overflow: hidden;
 }
-.hero-content{max-width: 680px; margin: auto;}
-.hero-crown{
-  font-size: 54px;
-  filter: drop-shadow(0 0 20px rgba(255,212,92,0.4));
-  animation: float 3.5s ease-in-out infinite;
-  display: inline-block;
-  margin-bottom: 8px;
+.profile-hero::after{
+  content:'👤';
+  position:absolute;
+  right:15px;
+  bottom:-20px;
+  font-size:120px;
+  opacity:0.04;
+  pointer-events:none;
 }
-@keyframes float {
-  0%, 100%{transform: translateY(0)}
-  50%{transform: translateY(-8px)}
+.profile-avatar-wrap{
+  display: flex;
+  align-items: center;
+  gap: 22px;
 }
-.hero h1{
-  font-size: clamp(36px, 7vw, 62px);
-  font-weight: 900;
-  letter-spacing: 1px;
-  line-height: 1.1;
-  margin-bottom: 10px;
+.avatar-badge-box{
+  position: relative;
+}
+.avatar-lg{
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
   background: var(--gold-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 2px 10px rgba(255,212,92,0.2));
+  color: #120c05;
+  font-size: 34px;
+  font-weight: 900;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 8px 24px rgba(255, 212, 92, 0.3);
+  border: 3px solid #090610;
 }
-.hero-sub{
-  font-size: 16px;
-  color: var(--text-muted);
-  letter-spacing: 2px;
-  text-transform: uppercase;
+.edit-avatar-btn{
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #090610;
+  border: 1px solid var(--border-gold);
+  color: var(--gold-primary);
+  font-size: 12px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: var(--transition);
+}
+.edit-avatar-btn:hover{transform: scale(1.1)}
+.profile-titles h1{
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  margin-bottom: 4px;
+}
+.profile-meta-tags{
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.tag-pill{
+  font-size: 11px;
   font-weight: 700;
-  margin-bottom: 28px;
+  padding: 3px 10px;
+  border-radius: 50px;
 }
+.tag-vip{
+  background: rgba(255, 212, 92, 0.1);
+  border: 1px solid var(--border-gold);
+  color: var(--gold-primary);
+}
+.tag-verified{
+  background: rgba(56, 239, 125, 0.1);
+  border: 1px solid rgba(56, 239, 125, 0.4);
+  color: var(--green-win);
+}
+.profile-actions{
+  display: flex;
+  gap: 10px;
+}
+
+/* Common Buttons */
 .btn{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  padding:14px 34px;
+  padding:12px 22px;
   border-radius:var(--radius-sm);
   font-size:13px;
   font-weight:800;
-  letter-spacing:1px;
   cursor:pointer;
   transition:var(--transition);
   border:none;
@@ -141,211 +192,165 @@ nav a:hover::after, nav a.active::after{
 .primary{
   background: var(--gold-gradient);
   color:#150e05;
-  box-shadow: 0 4px 20px rgba(255, 212, 92, 0.3);
+  box-shadow: 0 4px 18px rgba(255, 212, 92, 0.28);
 }
 .primary:hover{
-  box-shadow: 0 6px 28px rgba(255, 212, 92, 0.5);
+  box-shadow: 0 6px 24px rgba(255, 212, 92, 0.45);
   transform: translateY(-2px);
 }
-
-/* 3. Search & Category Filters */
-.discovery-bar{
-  margin-bottom: 35px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-.search-box-wrapper{
-  position: relative;
-  max-width: 580px;
-  margin: auto;
-  width: 100%;
-}
-.search-icon{
-  position: absolute;
-  left: 18px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 16px;
-  opacity: 0.6;
-}
-.search-input{
-  width: 100%;
-  padding: 14px 16px 14px 48px;
-  background: var(--bg-surface);
+.outline{
+  border: 1px solid var(--border-subtle);
+  background: rgba(255,255,255,0.03);
   color: #fff;
-  border: 1px solid var(--border-subtle);
-  border-radius: 50px;
-  outline: none;
-  font-size: 14px;
-  transition: var(--transition);
 }
-.search-input:focus{
-  border-color: var(--gold-primary);
-  box-shadow: 0 0 15px rgba(255, 212, 92, 0.2);
-  background: #181126;
+.outline:hover{
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.25);
+  transform: translateY(-2px);
 }
-.categories-wrap{
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  flex-wrap: wrap;
+.danger{
+  background: rgba(255, 78, 106, 0.12);
+  border: 1px solid var(--red-alert);
+  color: var(--red-alert);
 }
-.cat-btn{
+.danger:hover{
+  background: var(--red-alert);
+  color: #fff;
+}
+
+/* Two-Column Grid */
+.profile-grid{
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 24px;
+  margin-bottom: 60px;
+}
+.panel{
   background: var(--bg-surface);
-  color: var(--text-muted);
   border: 1px solid var(--border-subtle);
-  padding: 8px 18px;
-  border-radius: 50px;
+  border-radius: var(--radius-md);
+  padding: 26px;
+  margin-bottom: 24px;
+}
+.panel:last-child{margin-bottom: 0}
+.panel-head{
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.panel-head h2{
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: #fff;
+}
+
+/* Form Layout */
+.form-row{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.field-group{
+  margin-bottom: 16px;
+}
+.field-group label{
+  display: block;
   font-size: 12px;
   font-weight: 700;
-  cursor: pointer;
-  transition: var(--transition);
-}
-.cat-btn:hover, .cat-btn.active{
-  background: var(--gold-primary);
-  color: #140d05;
-  border-color: var(--gold-primary);
-  box-shadow: 0 0 12px rgba(255, 212, 92, 0.3);
-  transform: translateY(-1px);
-}
-
-/* 4. Section Headers */
-section.block{padding: 60px 0}
-.heading{text-align:center;margin-bottom:34px}
-.heading small{
-  color:var(--gold-primary);
-  letter-spacing:2px;
-  font-weight:800;
-  font-size:11px;
-}
-.heading h2{font-size:34px;margin:6px 0;letter-spacing:-0.5px}
-
-/* 5. Games Grid & 3D Cards */
-.games-grid{
-  display:grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap:18px;
-}
-.game-card{
-  background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-surface) 100%);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  transition: var(--transition);
-  display: flex;
-  flex-direction: column;
-}
-.game-card:hover{
-  transform: translateY(-6px);
-  border-color: var(--border-gold);
-  box-shadow: 0 18px 35px rgba(0,0,0,0.6), 0 0 20px rgba(255, 212, 92, 0.15);
-}
-
-/* 3D Icon Container */
-.game-icon{
-  height:150px;
-  display:grid;
-  place-items:center;
-  background: radial-gradient(circle at center, #2b1c47 0%, #100b19 100%);
-  position:relative;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-}
-.game-icon::before{
-  content:"";
-  position:absolute;
-  width:94px;
-  height:94px;
-  border-radius:24px;
-  transform:rotate(-8deg);
-  background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.02) 100%);
-  border: 2px solid rgba(255,255,255,0.22);
-  box-shadow:
-    inset 4px 4px 8px rgba(255,255,255,0.15),
-    inset -6px -6px 12px rgba(0,0,0,0.7),
-    0 12px 24px rgba(0,0,0,0.5);
-  transition: var(--transition);
-}
-.game-card:hover .game-icon::before{
-  transform: rotate(0deg) scale(1.06);
-  border-color: var(--border-gold);
-}
-.game-icon span{
-  position:relative;
-  z-index:2;
-  font-size:56px;
-  filter: drop-shadow(0 10px 8px rgba(0,0,0,0.65));
-  transition: var(--transition);
-}
-.game-card:hover .game-icon span{
-  transform: scale(1.15);
-}
-
-.game-info{padding:16px;display:flex;flex-direction:column;flex:1}
-.tag{
-  align-self:flex-start;
-  font-size:10px;
-  font-weight:700;
-  padding:3px 10px;
-  border-radius:50px;
-  color:var(--gold-primary);
-  background:rgba(255, 212, 92, 0.08);
-  border:1px solid var(--border-gold);
-}
-.game-info h3{font-size:15px;margin:10px 0 14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.play-btn{
-  display:block;
-  text-align:center;
-  width:100%;
-  padding:10px;
-  border-radius:var(--radius-sm);
-  background: var(--gold-gradient);
-  color:#17100a;
-  font-weight:800;
-  font-size:12px;
-  letter-spacing:0.8px;
-  margin-top:auto;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  transition: var(--transition);
-}
-.game-card:hover .play-btn{
-  filter: brightness(1.1);
-  box-shadow: 0 4px 18px rgba(255, 212, 92, 0.4);
-}
-.empty-msg{
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: 50px 0;
   color: var(--text-muted);
-  font-size: 15px;
+  margin-bottom: 6px;
 }
-
-/* 6. Features Strip */
-.features{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-}
-.feature{
-  background: var(--bg-surface);
+.field-group input, .field-group select{
+  width: 100%;
+  padding: 12px 14px;
+  background: #090610;
+  color: #fff;
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  padding: 28px;
-  text-align: center;
+  border-radius: var(--radius-sm);
+  outline: none;
+  font-size: 13px;
   transition: var(--transition);
 }
-.feature:hover{
-  border-color: rgba(255,255,255,0.18);
-  transform: translateY(-3px);
+.field-group input:focus, .field-group select:focus{
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 12px rgba(255, 212, 92, 0.2);
 }
-.feature-icon{
-  font-size:32px;
-  margin-bottom:12px;
-}
-.feature h3{font-size:17px;margin-bottom:6px}
-.feature p{color:var(--text-muted);font-size:13px}
 
-/* 7. Footer */
+/* Toggle Switches */
+.setting-item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.setting-item:last-child{border-bottom: none; padding-bottom: 4px}
+.setting-label h4{font-size: 14px; margin-bottom: 2px}
+.setting-label p{font-size: 12px; color: var(--text-muted)}
+
+.switch{
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+.switch input{opacity: 0; width: 0; height: 0}
+.slider{
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: #211933;
+  border: 1px solid var(--border-subtle);
+  transition: .3s;
+  border-radius: 24px;
+}
+.slider:before{
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  background-color: #fff;
+  transition: .3s;
+  border-radius: 50%;
+}
+input:checked + .slider{
+  background-color: var(--gold-primary);
+}
+input:checked + .slider:before{
+  transform: translateX(20px);
+  background-color: #120c05;
+}
+
+/* Notification Toast */
+.toast{
+  display: none;
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-gold);
+  color: #fff;
+  padding: 14px 22px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8), var(--gold-glow);
+  z-index: 100;
+  animation: slideUp 0.3s ease;
+}
+@keyframes slideUp{
+  from{transform: translateY(20px); opacity: 0}
+  to{transform: translateY(0); opacity: 1}
+}
+
+/* Footer */
 footer{
   border-top:1px solid var(--border-subtle);
   padding:30px;
@@ -357,24 +362,20 @@ footer{
   text-align:center;
   color:#6c6676;
   font-size:11px;
-  margin:40px auto 15px;
+  margin:20px auto 15px;
   max-width:850px;
-  padding:0 20px;
 }
 
-/* Mobile & Tablet Responsiveness */
 @media(max-width:900px){
-  .features{grid-template-columns:1fr}
+  .profile-grid{grid-template-columns: 1fr}
 }
 @media(max-width:620px){
   .nav{flex-direction:column;gap:12px;padding:14px 0}
   nav ul{gap:14px}
-  .games-grid{grid-template-columns:repeat(2,1fr);gap:10px}
-  .game-icon{height:120px}
-  .game-icon span{font-size:42px}
-  .game-icon::before{width:76px;height:76px}
-  .hero h1{font-size:38px}
-  .hero-sub{font-size:13px}
+  .form-row{grid-template-columns: 1fr}
+  .profile-hero{flex-direction: column; text-align: center; justify-content: center}
+  .profile-avatar-wrap{flex-direction: column}
+  .profile-actions{width: 100%; justify-content: center}
 }
 </style>
 </head>
@@ -382,164 +383,223 @@ footer{
 
 <header>
   <div class="container nav">
-    <a class="logo" href="#home">👑 ROYAL SLOT 777</a>
+    <a class="logo" href="index.html">👑 ROYAL SLOT 777</a>
     <nav>
       <ul>
-        <li><a href="#home" class="active">Home</a></li>
-        <li><a href="#games">Games</a></li>
-        <li><a href="#login">Login</a></li>
-        <li><a href="#dashboard">Dashboard</a></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="games.html">Games</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="#" class="active">Profile</a></li>
       </ul>
     </nav>
   </div>
 </header>
 
-<main>
-  <section class="hero" id="home">
-    <div class="container hero-content">
-      <div class="hero-crown">👑</div>
-      <h1>ROYAL SLOT 777</h1>
-      <p class="hero-sub">Play • Explore • Enjoy</p>
-      <a class="btn primary" href="#games-section">EXPLORE GAMES</a>
+<main class="container">
+
+  <section class="profile-banner">
+    <div class="profile-hero">
+      <div class="profile-avatar-wrap">
+        <div class="avatar-badge-box">
+          <div class="avatar-lg" id="avatar-display">A</div>
+          <button class="edit-avatar-btn" title="Change Avatar" onclick="cycleAvatar()">✏️</button>
+        </div>
+        <div class="profile-titles">
+          <h1 id="user-display-name">Alex Morgan</h1>
+          <div class="profile-meta-tags">
+            <span class="tag-pill tag-vip">👑 VIP Level 3</span>
+            <span class="tag-pill tag-verified">✓ Verified Demo Account</span>
+            <span style="font-size: 12px; color: var(--text-muted);">Member since Jan 2026</span>
+          </div>
+        </div>
+      </div>
+      <div class="profile-actions">
+        <button class="btn primary" onclick="saveProfileChanges()">SAVE CHANGES</button>
+      </div>
     </div>
   </section>
 
-  <section class="block" id="games-section">
-    <div class="container">
+  <div class="profile-grid">
+    
+    <div>
       
-      <div class="discovery-bar">
-        <div class="search-box-wrapper">
-          <span class="search-icon">🔎</span>
-          <input type="text" id="search-input" class="search-input" placeholder="Search games by name or category...">
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Personal Information</h2>
+          <small style="color: var(--text-muted);">Royal ID: #RS-99482</small>
         </div>
-        
-        <div class="categories-wrap" id="category-pills">
-          <button class="cat-btn active" data-category="all">All</button>
-          <button class="cat-btn" data-category="Slot">Slot</button>
-          <button class="cat-btn" data-category="Card Game">Card Game</button>
-          <button class="cat-btn" data-category="Board Game">Board Game</button>
-          <button class="cat-btn" data-category="Dragon Tiger">Dragon Tiger</button>
-          <button class="cat-btn" data-category="Wheel">Wheel</button>
+
+        <form onsubmit="return false">
+          <div class="form-row">
+            <div class="field-group">
+              <label for="prof-fname">First Name</label>
+              <input type="text" id="prof-fname" value="Alex">
+            </div>
+            <div class="field-group">
+              <label for="prof-lname">Last Name</label>
+              <input type="text" id="prof-lname" value="Morgan">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field-group">
+              <label for="prof-email">Email Address</label>
+              <input type="email" id="prof-email" value="alex.morgan@royalslot.com">
+            </div>
+            <div class="field-group">
+              <label for="prof-user">Display Handle</label>
+              <input type="text" id="prof-user" value="@alex_royal">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field-group">
+              <label for="prof-lang">Interface Language</label>
+              <select id="prof-lang">
+                <option value="en" selected>English (Global)</option>
+                <option value="hi">Hindi (हिन्दी)</option>
+                <option value="es">Spanish (Español)</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label for="prof-tz">Timezone</label>
+              <select id="prof-tz">
+                <option value="ist" selected>GMT+05:30 (IST)</option>
+                <option value="utc">GMT+00:00 (UTC)</option>
+                <option value="est">GMT-05:00 (EST)</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Gameplay Settings</h2>
+          <small style="color: var(--text-muted);">In-game behavior</small>
         </div>
-      </div>
 
-      <div class="heading">
-        <small>COLLECTION</small>
-        <h2>🎮 All Games</h2>
-      </div>
+        <div class="setting-item">
+          <div class="setting-label">
+            <h4>Slot Sound Effects & Chimes</h4>
+            <p>Audio playback during reel rotations and winning rows</p>
+          </div>
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
 
-      <div class="games-grid" id="games-container"></div>
+        <div class="setting-item">
+          <div class="setting-label">
+            <h4>Turbo Spin Mode</h4>
+            <p>Faster reel animations with shortened spin delay</p>
+          </div>
+          <label class="switch">
+            <input type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-label">
+            <h4>Auto-Claim Login Rewards</h4>
+            <p>Automatically credit consecutive daily chip bonuses on open</p>
+          </div>
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+      </section>
+
     </div>
-  </section>
 
-  <section class="block" id="features" style="padding-top:0">
-    <div class="container">
-      <div class="heading">
-        <small>QUALITY ASSURANCE</small>
-        <h2>Features</h2>
-      </div>
-      <div class="features">
-        <div class="feature">
-          <div class="feature-icon">⚡</div>
-          <h3>Fast</h3>
-          <p>Instant loading simulator with zero bloat and smooth transitions.</p>
+    <div>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Security & Credentials</h2>
         </div>
-        <div class="feature">
-          <div class="feature-icon">📱</div>
-          <h3>Mobile</h3>
-          <p>Responsive multi-breakpoint layout tested across mobile screens.</p>
+
+        <div class="field-group">
+          <label for="cur-pass">Current Password</label>
+          <input type="password" id="cur-pass" placeholder="••••••••">
         </div>
-        <div class="feature">
-          <div class="feature-icon">🔒</div>
-          <h3>Safe</h3>
-          <p>Strictly safe, educational demo points. Zero real-money risk.</p>
+
+        <div class="field-group">
+          <label for="new-pass">New Password</label>
+          <input type="password" id="new-pass" placeholder="••••••••">
         </div>
-      </div>
+
+        <button class="btn outline" style="width: 100%; margin-top: 6px;" onclick="triggerToast('Password updated successfully!')">UPDATE PASSWORD</button>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2 style="color: var(--red-alert);">Simulator Controls</h2>
+        </div>
+
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+          Need to start over? You can refill your test wallet or purge session storage.
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <button class="btn outline" onclick="refillChips()">🪙 RESET TO 10,000 DEMO CREDITS</button>
+          <button class="btn danger" onclick="clearDemoData()">🗑️ CLEAR LOCAL STORAGE CACHE</button>
+        </div>
+      </section>
+
     </div>
-  </section>
+
+  </div>
+
 </main>
 
-<p class="notice">Structure/demo version only. No real-money betting, deposits, withdrawals, payment processing, or gambling functionality is connected.</p>
+<div class="toast" id="toast-box">Profile updated successfully!</div>
+
+<p class="notice">Configuration demo only. Settings and simulated wallet resets are persisted in local memory.</p>
 <footer>© 2026 Royal Slot 777. All rights reserved.</footer>
 
 <script>
-const gamesData = [
-  { id: 1, title: 'Royal Teen Patti', tag: 'Card Game', icon: '🃏' },
-  { id: 2, title: 'Royal Ludo', tag: 'Board Game', icon: '🎲' },
-  { id: 3, title: 'Dragon Fortune', tag: 'Slot', icon: '🐉' },
-  { id: 4, title: 'Golden Goddess', tag: 'Slot', icon: '👸' },
-  { id: 5, title: 'Lucky Tree', tag: 'Slot', icon: '🌳' },
-  { id: 6, title: 'Mystic Egg', tag: 'Slot', icon: '🥚' },
-  { id: 7, title: 'Fortune Tiger', tag: 'Slot', icon: '🐯' },
-  { id: 8, title: 'Royal Lion', tag: 'Slot', icon: '🦁' },
-  { id: 9, title: 'Phoenix Gold', tag: 'Slot', icon: '🔥' },
-  { id: 10, title: 'Lucky Panda', tag: 'Slot', icon: '🐼' },
-  { id: 11, title: 'Divine Fortune', tag: 'Slot', icon: '✨' },
-  { id: 12, title: 'Golden Dragon', tag: 'Slot', icon: '🐲' },
-  { id: 13, title: 'Fortune Temple', tag: 'Slot', icon: '🏛️' },
-  { id: 14, title: 'Monkey Treasure', tag: 'Slot', icon: '🐒' },
-  { id: 15, title: 'Magic Forest', tag: 'Slot', icon: '🌲' },
-  { id: 16, title: "Dragon's Treasure", tag: 'Slot', icon: '💎' },
-  { id: 17, title: 'Royal Fortune', tag: 'Slot', icon: '👑' },
-  { id: 18, title: 'Royal Dragon Tiger', tag: 'Dragon Tiger', icon: '🐉' },
-  { id: 19, title: 'Golden Dragon Tiger', tag: 'Dragon Tiger', icon: '🐲' },
-  { id: 20, title: 'Fortune Dragon Tiger', tag: 'Dragon Tiger', icon: '🍀' },
-  { id: 21, title: 'Mystic Dragon Tiger', tag: 'Dragon Tiger', icon: '🔮' },
-  { id: 22, title: 'Fortune Wheel', tag: 'Wheel', icon: '🎡' },
-  { id: 23, title: 'Royal Wheel', tag: 'Wheel', icon: '👑' },
-  { id: 24, title: 'Golden Wheel', tag: 'Wheel', icon: '🪙' },
-  { id: 25, title: 'Lucky Wheel', tag: 'Wheel', icon: '🍀' },
-  { id: 26, title: 'Wheel of Fortune', tag: 'Wheel', icon: '🎯' }
-];
+const avatarIcons = ['A', '👑', '🦁', '🐉', '🐯', '💎'];
+let avatarIdx = 0;
 
-let selectedCategory = 'all';
-let searchQuery = '';
-
-function renderGames() {
-  const container = document.getElementById('games-container');
-  
-  const filtered = gamesData.filter(game => {
-    const matchesCategory = (selectedCategory === 'all') || (game.tag === selectedCategory);
-    const matchesSearch = game.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          game.tag.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
-
-  if (filtered.length === 0) {
-    container.innerHTML = `<div class="empty-msg">No games found matching your search.</div>`;
-    return;
-  }
-
-  container.innerHTML = filtered.map(g => `
-    <a class="game-card" href="#game-${g.id}">
-      <div class="game-icon"><span>${g.icon}</span></div>
-      <div class="game-info">
-        <span class="tag">${g.tag}</span>
-        <h3>${g.title}</h3>
-        <span class="play-btn">PLAY</span>
-      </div>
-    </a>
-  `).join('');
+function cycleAvatar() {
+  avatarIdx = (avatarIdx + 1) % avatarIcons.length;
+  document.getElementById('avatar-display').textContent = avatarIcons[avatarIdx];
+  triggerToast(`Avatar changed to: ${avatarIcons[avatarIdx]}`);
 }
 
-// Live Search Listener
-document.getElementById('search-input').addEventListener('input', (e) => {
-  searchQuery = e.target.value.trim();
-  renderGames();
-});
+function saveProfileChanges() {
+  const fName = document.getElementById('prof-fname').value.trim();
+  const lName = document.getElementById('prof-lname').value.trim();
+  
+  if (fName) {
+    document.getElementById('user-display-name').textContent = `${fName} ${lName}`;
+  }
+  triggerToast('✓ Changes saved successfully!');
+}
 
-// Category Filter Listener
-document.querySelectorAll('.cat-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    selectedCategory = btn.getAttribute('data-category');
-    renderGames();
-  });
-});
+function refillChips() {
+  triggerToast('✓ Demo credits replenished to 10,000!');
+}
 
-// Initial Render
-renderGames();
+function clearDemoData() {
+  if (confirm('Are you sure you want to clear your local simulator cache?')) {
+    triggerToast('✓ Local session data cleared.');
+  }
+}
+
+function triggerToast(message) {
+  const toast = document.getElementById('toast-box');
+  toast.textContent = message;
+  toast.style.display = 'block';
+  
+  setTimeout(() => {
+    toast.style.display = 'none';
+  }, 2500);
+}
 </script>
 </body>
 </html>
