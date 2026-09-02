@@ -1,92 +1,424 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#0b0714"><title>Royal Slot 777</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0714">
+<title>Royal Slot 777</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
 body{font-family:Arial,Helvetica,sans-serif;background:#0b0714;color:#fff;line-height:1.6}
-a{text-decoration:none;color:inherit}button,input{font:inherit}
+a{text-decoration:none;color:inherit}
+button,input{font:inherit}
 .container{width:min(1120px,92%);margin:auto}
 header{position:sticky;top:0;z-index:99;background:rgba(11,7,20,.96);border-bottom:1px solid #292333}
 .nav{min-height:70px;display:flex;align-items:center;justify-content:space-between}
-.logo{font-size:21px;font-weight:800;color:#ffd45c}nav ul{display:flex;list-style:none;gap:20px}
-nav a{font-size:13px;color:#ddd}nav a:hover{color:#ffd45c}
-.page-view{display:none}.page-view.active{display:block}
+.logo{font-size:21px;font-weight:800;color:#ffd45c}
+nav ul{display:flex;list-style:none;gap:20px}
+nav a{font-size:13px;color:#ddd;transition:.2s}
+nav a:hover{color:#ffd45c}
+.page-view{display:none}
+.page-view.active{display:block}
 .hero{min-height:570px;display:flex;align-items:center;background:radial-gradient(circle at 80% 30%,rgba(125,70,255,.25),transparent 35%),radial-gradient(circle at 20% 30%,rgba(255,190,60,.09),transparent 30%)}
 .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:45px;align-items:center;padding:70px 0}
 .badge,.tag{display:inline-block;color:#ffd45c;border:1px solid rgba(255,212,92,.25);padding:5px 10px;border-radius:50px;font-size:10px;font-weight:800}
-h1{font-size:clamp(42px,7vw,68px);line-height:1.04;margin:16px 0}h1 span{color:#ffd45c}
+h1{font-size:clamp(42px,7vw,68px);line-height:1.04;margin:16px 0}
+h1 span{color:#ffd45c}
 .hero-text{color:#b7b1c1;max-width:580px;margin-bottom:25px}
-.buttons{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.hero .buttons{justify-content:flex-start}
-.btn{display:inline-block;padding:12px 20px;border-radius:9px;font-size:13px;font-weight:800;border:0;cursor:pointer}
-.primary{background:#ffd45c;color:#17100a}.outline{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.03)}
+.buttons{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.hero .buttons{justify-content:flex-start}
+.btn{display:inline-block;padding:12px 20px;border-radius:9px;font-size:13px;font-weight:800;border:0;cursor:pointer;text-align:center}
+.primary{background:#ffd45c;color:#17100a}
+.outline{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.03)}
 .hero-box,.game-area{border:1px solid rgba(255,255,255,.08);border-radius:22px;background:linear-gradient(145deg,#1c142b,#100a18);box-shadow:0 25px 70px #0008}
-.hero-box{min-height:320px;display:grid;place-items:center;text-align:center}.hero-box .crown{font-size:75px}.hero-box h2{color:#ffd45c}
-section.block{padding:70px 0}.heading{text-align:center;margin-bottom:30px}.heading small{color:#ffd45c;letter-spacing:2px;font-weight:800;font-size:10px}
-.heading h2{font-size:34px;margin:7px 0}.heading p{color:#aaa;font-size:14px}
+.hero-box{min-height:320px;display:grid;place-items:center;text-align:center}
+.hero-box .crown{font-size:75px}
+.hero-box h2{color:#ffd45c}
+section.block{padding:70px 0}
+.heading{text-align:center;margin-bottom:30px}
+.heading small{color:#ffd45c;letter-spacing:2px;font-weight:800;font-size:10px}
+.heading h2{font-size:34px;margin:7px 0}
+.heading p{color:#aaa;font-size:14px}
 .games-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
-.game-card{background:linear-gradient(180deg,#1a1d2b,#11131d);border:1px solid #2d3040;border-radius:17px;overflow:hidden;transition:.2s}
+.game-card{background:linear-gradient(180deg,#1a1d2b,#11131d);border:1px solid #2d3040;border-radius:17px;overflow:hidden;transition:.2s;display:flex;flex-direction:column}
 .game-card:hover{transform:translateY(-4px);border-color:#c9a531}
 .game-icon{height:145px;display:grid;place-items:center;background:radial-gradient(circle,#30344c,#0d0f18);position:relative}
 .game-icon:before{content:"";position:absolute;width:98px;height:98px;border-radius:27px;transform:rotate(-7deg);background:linear-gradient(145deg,#686d89,#1a1c2a);border:2px solid #777b94;box-shadow:inset 6px 6px 12px #fff2,inset -10px -12px 20px #0009,0 12px 22px #000b}
 .game-icon span{position:relative;z-index:1;font-size:58px;filter:drop-shadow(0 8px 5px #000)}
-.game-info{padding:13px}.game-info h3{font-size:15px;margin:8px 0 11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.game-info button{width:100%;padding:9px;border:0;border-radius:9px;background:#ffd45c;font-weight:800;cursor:pointer}
-.features,.steps,.info{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.info{grid-template-columns:repeat(3,1fr)}
+.game-info{padding:13px;display:flex;flex-direction:column;flex:1}
+.game-info h3{font-size:15px;margin:8px 0 11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.game-info .play-btn{display:block;text-align:center;width:100%;padding:9px;border-radius:9px;background:#ffd45c;color:#17100a;font-weight:800;margin-top:auto}
+.features,.steps,.info{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.info{grid-template-columns:repeat(3,1fr);margin-top:25px}
 .feature,.step,.info>div{background:#120d1d;border:1px solid #292333;border-radius:15px;padding:20px}
-.feature-icon{font-size:27px;margin-bottom:8px}.feature p,.step p,.info p{color:#aaa;font-size:12px}.number{color:#ffd45c;font-weight:800;margin-bottom:15px}
-.cta{text-align:center;padding:55px 20px;border:1px solid rgba(255,212,92,.12);border-radius:20px;background:linear-gradient(145deg,#1b1329,#0f0917)}
-.cta h2{font-size:35px;margin-bottom:8px}.cta p{color:#aaa;margin-bottom:20px}
-.faq{max-width:800px;margin:auto}.faq-item{padding:17px 20px;margin-bottom:9px;border:1px solid #292333;border-radius:12px;background:#120d1d}
-.faq-item h3{font-size:15px;margin-bottom:5px}.faq-item p{font-size:12px;color:#aaa}
+.feature-icon{font-size:27px;margin-bottom:8px}
+.feature p,.step p,.info p{color:#aaa;font-size:12px}
+.number{color:#ffd45c;font-weight:800;margin-bottom:15px}
+.faq{max-width:800px;margin:auto}
+.faq-item{padding:17px 20px;margin-bottom:9px;border:1px solid #292333;border-radius:12px;background:#120d1d}
+.faq-item h3{font-size:15px;margin-bottom:5px}
+.faq-item p{font-size:12px;color:#aaa}
 .auth-wrap,.profile-wrap{min-height:calc(100vh - 140px);display:grid;place-items:center;padding:50px 0}
 .auth-box,.profile-box{width:min(450px,100%);padding:32px;border:1px solid #292333;border-radius:20px;background:linear-gradient(145deg,#191126,#100a18);box-shadow:0 25px 70px #0008}
-.auth-icon{text-align:center;font-size:50px}.auth-box h1,.profile-box h1{font-size:30px;text-align:center;margin:8px 0}
-.sub{text-align:center;color:#999;font-size:13px;margin-bottom:25px}label{display:block;color:#ddd;font-size:12px;margin-bottom:6px}
+.auth-icon{text-align:center;font-size:50px}
+.auth-box h1,.profile-box h1{font-size:30px;text-align:center;margin:8px 0}
+.sub{text-align:center;color:#999;font-size:13px;margin-bottom:25px}
+label{display:block;color:#ddd;font-size:12px;margin-bottom:6px}
 input{width:100%;padding:12px;margin-bottom:15px;background:#0d0915;color:#fff;border:1px solid #30283d;border-radius:9px;outline:none}
-.auth-box button{width:100%}.links{text-align:center;color:#999;font-size:12px;margin-top:18px}.links a{color:#ffd45c}
-.profile-row{padding:14px 0;border-bottom:1px solid #292333}.profile-row small{color:#888;display:block;font-size:10px}.profile-row span{font-size:14px}
-.game-view{padding:65px 0}.game-header{text-align:center;margin-bottom:28px}.game-header .big-icon{font-size:65px}
-.game-header h1{font-size:48px;margin:10px 0}.game-header p{color:#aaa}.game-area{min-height:370px;display:grid;place-items:center;text-align:center;padding:30px}
-.placeholder-icon{font-size:70px}.game-area h2{color:#ffd45c;margin:10px 0 5px}.game-area p{color:#999;max-width:550px;margin:0 auto 20px;font-size:13px}
-footer{border-top:1px solid #292333;padding:25px;text-align:center;color:#777;font-size:11px}.notice{text-align:center;color:#777;font-size:11px;margin:25px auto;max-width:850px}
-@media(max-width:900px){.games-grid{grid-template-columns:repeat(3,1fr)}.features,.steps{grid-template-columns:1fr 1fr}.hero-grid{grid-template-columns:1fr;text-align:center}.hero .buttons{justify-content:center}}
-@media(max-width:620px){.nav{align-items:flex-start;padding:12px 0}nav ul{gap:8px;flex-wrap:wrap;justify-content:flex-end}nav a{font-size:10px}.games-grid{grid-template-columns:repeat(2,1fr);gap:9px}.game-icon{height:120px}.game-icon span{font-size:48px}.game-icon:before{width:85px;height:85px}.features,.steps,.info{grid-template-columns:1fr}.hero-grid{padding:55px 0}.hero-box{min-height:260px}}
+.auth-box button{width:100%}
+.links{text-align:center;color:#999;font-size:12px;margin-top:18px}
+.links a{color:#ffd45c}
+.profile-row{padding:14px 0;border-bottom:1px solid #292333}
+.profile-row small{color:#888;display:block;font-size:10px}
+.profile-row span{font-size:14px}
+.game-view{padding:65px 0}
+.game-header{text-align:center;margin-bottom:28px}
+.game-header .big-icon{font-size:65px}
+.game-header h1{font-size:48px;margin:10px 0}
+.game-header p{color:#aaa}
+.game-area{min-height:370px;display:grid;place-items:center;text-align:center;padding:30px}
+.placeholder-icon{font-size:70px}
+.game-area h2{color:#ffd45c;margin:10px 0 5px}
+.game-area p{color:#999;max-width:550px;margin:0 auto 20px;font-size:13px}
+footer{border-top:1px solid #292333;padding:25px;text-align:center;color:#777;font-size:11px}
+.notice{text-align:center;color:#777;font-size:11px;margin:25px auto;max-width:850px}
+@media(max-width:900px){
+  .games-grid{grid-template-columns:repeat(3,1fr)}
+  .features,.steps,.info{grid-template-columns:1fr 1fr}
+  .hero-grid{grid-template-columns:1fr;text-align:center}
+  .hero .buttons{justify-content:center}
+}
+@media(max-width:620px){
+  .nav{align-items:flex-start;padding:12px 0}
+  nav ul{gap:8px;flex-wrap:wrap;justify-content:flex-end}
+  nav a{font-size:10px}
+  .games-grid{grid-template-columns:repeat(2,1fr);gap:9px}
+  .game-icon{height:120px}
+  .game-icon span{font-size:48px}
+  .game-icon:before{width:85px;height:85px}
+  .features,.steps,.info{grid-template-columns:1fr}
+  .hero-grid{padding:55px 0}
+  .hero-box{min-height:260px}
+}
 </style>
 </head>
 <body>
-<header><div class="container nav"><a class="logo" href="#home" onclick="showPage('home')">👑 ROYAL SLOT 777</a>
-<nav><ul><li><a href="#home" onclick="showPage('home')">Home</a></li><li><a href="#games" onclick="showPage('games')">Games</a></li><li><a href="#login" onclick="showPage('login')">Login</a></li><li><a href="#register" onclick="showPage('register')">Register</a></li><li><a href="#dashboard" onclick="showPage('dashboard')">Dashboard</a></li></ul></nav></div></header>
+
+<header>
+  <div class="container nav">
+    <a class="logo" href="#home">👑 ROYAL SLOT 777</a>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#games">Games</a></li>
+        <li><a href="#login">Login</a></li>
+        <li><a href="#register">Register</a></li>
+        <li><a href="#dashboard">Dashboard</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
 <main>
-<section id="home" class="page-view active">
-<div class="hero"><div class="container hero-grid"><div><span class="badge">WELCOME TO ROYAL SLOT 777</span><h1>Enter The <span>Royal</span><br>Gaming World</h1><p class="hero-text">Explore a modern gaming-style website with a premium interface, exciting demo games and a smooth mobile-friendly experience.</p><div class="buttons"><a class="btn primary" href="#games" onclick="showPage('games')">Explore Games</a><a class="btn outline" href="#how">How It Works</a></div></div><div class="hero-box"><div><div class="crown">👑</div><h2>ROYAL SLOT 777</h2><p>Premium Gaming Experience</p></div></div></div></div>
-<section class="block" id="games-home"><div class="container"><div class="heading"><small>GAME COLLECTION</small><h2>Explore The Games</h2><p>All games are arranged in a responsive grid.</p></div><div class="games-grid"><a class="game-card" href="#game-1" onclick="showPage('game-1')"><div class="game-icon"><span>🃏</span></div><div class="game-info"><span class="tag">Card Game</span><h3>Royal Teen Patti</h3><button>PLAY</button></div></a><a class="game-card" href="#game-2" onclick="showPage('game-2')"><div class="game-icon"><span>🎲</span></div><div class="game-info"><span class="tag">Board Game</span><h3>Royal Ludo</h3><button>PLAY</button></div></a><a class="game-card" href="#game-3" onclick="showPage('game-3')"><div class="game-icon"><span>🐉</span></div><div class="game-info"><span class="tag">Slot</span><h3>Dragon Fortune</h3><button>PLAY</button></div></a><a class="game-card" href="#game-4" onclick="showPage('game-4')"><div class="game-icon"><span>👸</span></div><div class="game-info"><span class="tag">Slot</span><h3>Golden Goddess</h3><button>PLAY</button></div></a><a class="game-card" href="#game-5" onclick="showPage('game-5')"><div class="game-icon"><span>🌳</span></div><div class="game-info"><span class="tag">Slot</span><h3>Lucky Tree</h3><button>PLAY</button></div></a><a class="game-card" href="#game-6" onclick="showPage('game-6')"><div class="game-icon"><span>🥚</span></div><div class="game-info"><span class="tag">Slot</span><h3>Mystic Egg</h3><button>PLAY</button></div></a><a class="game-card" href="#game-7" onclick="showPage('game-7')"><div class="game-icon"><span>🐯</span></div><div class="game-info"><span class="tag">Slot</span><h3>Fortune Tiger</h3><button>PLAY</button></div></a><a class="game-card" href="#game-8" onclick="showPage('game-8')"><div class="game-icon"><span>🦁</span></div><div class="game-info"><span class="tag">Slot</span><h3>Royal Lion</h3><button>PLAY</button></div></a><a class="game-card" href="#game-9" onclick="showPage('game-9')"><div class="game-icon"><span>🔥</span></div><div class="game-info"><span class="tag">Slot</span><h3>Phoenix Gold</h3><button>PLAY</button></div></a><a class="game-card" href="#game-10" onclick="showPage('game-10')"><div class="game-icon"><span>🐼</span></div><div class="game-info"><span class="tag">Slot</span><h3>Lucky Panda</h3><button>PLAY</button></div></a><a class="game-card" href="#game-11" onclick="showPage('game-11')"><div class="game-icon"><span>✨</span></div><div class="game-info"><span class="tag">Slot</span><h3>Divine Fortune</h3><button>PLAY</button></div></a><a class="game-card" href="#game-12" onclick="showPage('game-12')"><div class="game-icon"><span>🐲</span></div><div class="game-info"><span class="tag">Slot</span><h3>Golden Dragon</h3><button>PLAY</button></div></a><a class="game-card" href="#game-13" onclick="showPage('game-13')"><div class="game-icon"><span>🏛️</span></div><div class="game-info"><span class="tag">Slot</span><h3>Fortune Temple</h3><button>PLAY</button></div></a><a class="game-card" href="#game-14" onclick="showPage('game-14')"><div class="game-icon"><span>🐒</span></div><div class="game-info"><span class="tag">Slot</span><h3>Monkey Treasure</h3><button>PLAY</button></div></a><a class="game-card" href="#game-15" onclick="showPage('game-15')"><div class="game-icon"><span>🌲</span></div><div class="game-info"><span class="tag">Slot</span><h3>Magic Forest</h3><button>PLAY</button></div></a><a class="game-card" href="#game-16" onclick="showPage('game-16')"><div class="game-icon"><span>💎</span></div><div class="game-info"><span class="tag">Slot</span><h3>Dragon's Treasure</h3><button>PLAY</button></div></a><a class="game-card" href="#game-17" onclick="showPage('game-17')"><div class="game-icon"><span>👑</span></div><div class="game-info"><span class="tag">Slot</span><h3>Royal Fortune</h3><button>PLAY</button></div></a><a class="game-card" href="#game-18" onclick="showPage('game-18')"><div class="game-icon"><span>🐉</span></div><div class="game-info"><span class="tag">Dragon Tiger</span><h3>Royal Dragon Tiger</h3><button>PLAY</button></div></a><a class="game-card" href="#game-19" onclick="showPage('game-19')"><div class="game-icon"><span>🐲</span></div><div class="game-info"><span class="tag">Dragon Tiger</span><h3>Golden Dragon Tiger</h3><button>PLAY</button></div></a><a class="game-card" href="#game-20" onclick="showPage('game-20')"><div class="game-icon"><span>🍀</span></div><div class="game-info"><span class="tag">Dragon Tiger</span><h3>Fortune Dragon Tiger</h3><button>PLAY</button></div></a><a class="game-card" href="#game-21" onclick="showPage('game-21')"><div class="game-icon"><span>🔮</span></div><div class="game-info"><span class="tag">Dragon Tiger</span><h3>Mystic Dragon Tiger</h3><button>PLAY</button></div></a><a class="game-card" href="#game-22" onclick="showPage('game-22')"><div class="game-icon"><span>🎡</span></div><div class="game-info"><span class="tag">Wheel</span><h3>Fortune Wheel</h3><button>PLAY</button></div></a><a class="game-card" href="#game-23" onclick="showPage('game-23')"><div class="game-icon"><span>👑</span></div><div class="game-info"><span class="tag">Wheel</span><h3>Royal Wheel</h3><button>PLAY</button></div></a><a class="game-card" href="#game-24" onclick="showPage('game-24')"><div class="game-icon"><span>🪙</span></div><div class="game-info"><span class="tag">Wheel</span><h3>Golden Wheel</h3><button>PLAY</button></div></a><a class="game-card" href="#game-25" onclick="showPage('game-25')"><div class="game-icon"><span>🍀</span></div><div class="game-info"><span class="tag">Wheel</span><h3>Lucky Wheel</h3><button>PLAY</button></div></a><a class="game-card" href="#game-26" onclick="showPage('game-26')"><div class="game-icon"><span>🎯</span></div><div class="game-info"><span class="tag">Wheel</span><h3>Wheel of Fortune</h3><button>PLAY</button></div></a></div></div></section>
-<section class="block" id="features"><div class="container"><div class="heading"><small>FEATURES</small><h2>Why Choose Royal Slot 777?</h2></div><div class="features"><div class="feature"><div class="feature-icon">📱</div><h3>Mobile Friendly</h3><p>Responsive design for phone, tablet and desktop.</p></div><div class="feature"><div class="feature-icon">⚡</div><h3>Fast & Lightweight</h3><p>Simple frontend structure.</p></div><div class="feature"><div class="feature-icon">🎮</div><h3>Game Collection</h3><p>Multiple demo game pages ready.</p></div><div class="feature"><div class="feature-icon">🔐</div><h3>Clean Design</h3><p>Modern dark royal interface.</p></div></div></div></section>
-<section class="block" id="how"><div class="container"><div class="heading"><small>SIMPLE PROCESS</small><h2>How It Works</h2></div><div class="steps"><div class="step"><div class="number">01</div><h3>Create Account</h3><p>Account structure is ready for future integration.</p></div><div class="step"><div class="number">02</div><h3>Choose A Game</h3><p>Browse the complete collection.</p></div><div class="step"><div class="number">03</div><h3>Start Demo</h3><p>Open a game structure.</p></div><div class="step"><div class="number">04</div><h3>Track Progress</h3><p>Future demo progress can be added.</p></div></div></div></section>
-<section class="block" id="faq"><div class="container"><div class="heading"><small>FAQ</small><h2>Frequently Asked Questions</h2></div><div class="faq"><div class="faq-item"><h3>What is Royal Slot 777?</h3><p>A gaming-style frontend/demo website concept.</p></div><div class="faq-item"><h3>Can more games be added?</h3><p>Yes. The structure is designed to expand.</p></div><div class="faq-item"><h3>Can the icons be changed?</h3><p>Yes. Temporary icons can later be replaced with custom 3D artwork.</p></div></div></div></section>
-</section>
-<section id="games" class="page-view"><div class="container" style="padding:60px 0"><div class="heading"><small>ALL GAMES</small><h2>Royal Game Collection</h2><p>Choose any demo game below.</p></div><div class="games-grid"><a class="game-card" href="#game-1" onclick="showPage('game-1')"><div class="game-icon"><span>🃏</span></div><div class="game-info"><span class="tag">Card Game</span><h3>Royal Teen Patti</h3><button>PLAY</button></div></a><a class="game-card" href="#game-2" onclick="showPage('game-2')"><div class="game-icon"><span>🎲</span></div><div class="game-info"><span class="tag">Board Game</span><h3>Royal Ludo</h3><button>PLAY</button></div></a><a class="game-card" href="#game-3" onclick="showPage('game-3')"><div class="game-icon"><span>🐉</span></div><div class="game-info"><span class="tag">Slot</span><h3>Dragon Fortune</h3><button>PLAY</button></div></a><a class="game-card" href="#game-4" onclick="showPage('game-4')"><div class="game-icon"><span>👸</span></div><div class="game-info"><span class="tag">Slot</span><h3>Golden Goddess</h3><button>PLAY</button></div></a><a class="game-card" href="#game-5" onclick="showPage('game-5')"><div class="game-icon"><span>🌳</span></div><div class="game-info"><span class="tag">Slot</span><h3>Lucky Tree</h3><button>PLAY</button></div></a><a class="game-card" href="#game-6" onclick="showPage('game-6')"><div class="game-icon"><span>🥚</span></div><div class="game-info"><span class="tag">Slot</span><h3>Mystic Egg</h3><button>PLAY</button></div></a><a class="game-card" href="#game-7" onclick="showPage('game-7')"><div class="game-icon"><span>🐯</span></div><div class="game-info"><span class="tag">Slot</span><h3>Fortune Tiger</h3><button>PLAY</button></div></a><a class="game-card" href="#game-8" onclick="showPage('game-8')"><div class="game-icon"><span>🦁</span></div><div class="game-info"><span class="tag">Slot</span><h3>Royal Lion</h3><button>PLAY</button></div></a><a class="game-card" href="#game-9" onclick="showPage('game-9')"><div class="game-icon"><span>🔥</span></div><div class="game-info"><span class="tag">Slot</span><h3>Phoenix Gold</h3><button>PLAY</button></div></a><a class="game-card" href="#game-10" onclick="showPage('game-10')"><div class="game-icon"><span>🐼</span></div><div class="game-info"><span class="tag">Slot</span><h3>Lucky Panda</h3><button>PLAY</button></div></a><a class="game-card" href="#game-11" onclick="showPage('game-11')"><div class="game-icon"><span>✨</span></div><div class="game-info"><span class="tag">Slot</span><h3>Divine Fortune</h3><button>PLAY</button></div></a><a class="game-card" href="#game-12" onclick="showPage('game-12')"><div class="game-icon"><span>🐲</span></div><div class="game-info"><span class="tag">Slot</span><h3>Golden Dragon</h3><button>PLAY</button></div></a><a class="game-card" href="#game-13" onclick="showPage('game-13')"><div class="game-icon"><span>🏛️</span></div><div class="game-info"><span class="tag">Slot</span><h3>Fortune Temple</h3><button>PLAY</button></div></a><a class="game-card" href="#game-14" onclick="showPage('game-14')"><div class="game-icon"><span>🐒</span></div><div class="game-info"><span class="tag">Slot</span><h3>Monkey Treasure</h3><button>PLAY</button></div></a><a class="game-card" href="#game-15" onclick="showPage('game-15')"><div class="game-icon"><span>🌲</span></div><div class="game-info"><span class="tag">Slot</span><h3>Magic Forest</h3><button>PLAY</button></div></a><a class="game-card" href="#game-16" onclick="showPage('game-16')"><div class="game-icon"><span>💎</span></div><div class="game-info"><span class="tag">Slot</span><h3>Dragon's Treasure</h3><button>PLAY</button></div></a><a class="game-card" href="#game-17" onclick="showPage('game-17')"><div class="game-icon"><span>👑</span></div><div class="game-info"><span class="tag">Slot</span><h3>Royal Fortune</h3><button>PLAY</button></div></a><a class="game-card" href="#game-18" onclick="showPage('game-18')"><div class="game-icon"><span>🐉</span></div><div class="game-info"><span class="tag">Dragon Tiger</span><h3>Royal Dragon Tiger</h3><button>PLAY</button></div></a><a class="game-card" href="#game-19" onclick="showPage('game-19')"><div class="game-icon"><span>🐲</span></div><div class="game-info"><span class="tag">Dragon Tiger</span><h3>Golden Dragon Tiger</h3><button>PLAY</button></div></a><a class="game-card" href="#game-20" onclick="showPage('game-20')"><div class="game-icon"><span>🍀</span></div><div class="game-info"><span class="tag">Dragon Tiger</span><h3>Fortune Dragon Tiger</h3><button>PLAY</button></div></a><a class="game-card" href="#game-21" onclick="showPage('game-21')"><div class="game-icon"><span>🔮</span></div><div class="game-info"><span class="tag">Dragon Tiger</span><h3>Mystic Dragon Tiger</h3><button>PLAY</button></div></a><a class="game-card" href="#game-22" onclick="showPage('game-22')"><div class="game-icon"><span>🎡</span></div><div class="game-info"><span class="tag">Wheel</span><h3>Fortune Wheel</h3><button>PLAY</button></div></a><a class="game-card" href="#game-23" onclick="showPage('game-23')"><div class="game-icon"><span>👑</span></div><div class="game-info"><span class="tag">Wheel</span><h3>Royal Wheel</h3><button>PLAY</button></div></a><a class="game-card" href="#game-24" onclick="showPage('game-24')"><div class="game-icon"><span>🪙</span></div><div class="game-info"><span class="tag">Wheel</span><h3>Golden Wheel</h3><button>PLAY</button></div></a><a class="game-card" href="#game-25" onclick="showPage('game-25')"><div class="game-icon"><span>🍀</span></div><div class="game-info"><span class="tag">Wheel</span><h3>Lucky Wheel</h3><button>PLAY</button></div></a><a class="game-card" href="#game-26" onclick="showPage('game-26')"><div class="game-icon"><span>🎯</span></div><div class="game-info"><span class="tag">Wheel</span><h3>Wheel of Fortune</h3><button>PLAY</button></div></a></div></div></section>
-<section id="login" class="page-view"><div class="container auth-wrap"><div class="auth-box"><div class="auth-icon">👑</div><h1>Welcome Back</h1><p class="sub">Login page structure</p><form onsubmit="return false"><label>Email</label><input type="email" placeholder="Enter your email"><label>Password</label><input type="password" placeholder="Enter your password"><button class="btn primary">LOGIN</button></form><div class="links">Don't have an account? <a href="#register" onclick="showPage('register')">Create Account</a></div></div></div></section>
-<section id="register" class="page-view"><div class="container auth-wrap"><div class="auth-box"><div class="auth-icon">👑</div><h1>Create Account</h1><p class="sub">Registration page structure</p><form onsubmit="return false"><label>Full Name</label><input type="text" placeholder="Enter your name"><label>Email</label><input type="email" placeholder="Enter your email"><label>Password</label><input type="password" placeholder="Create password"><label>Confirm Password</label><input type="password" placeholder="Confirm password"><button class="btn primary">CREATE ACCOUNT</button></form><div class="links">Already have an account? <a href="#login" onclick="showPage('login')">Login</a></div></div></div></section>
-<section id="dashboard" class="page-view"><div class="container profile-wrap"><div class="profile-box"><div class="auth-icon">👑</div><h1>Dashboard</h1><p class="sub">Account overview structure</p><div class="info"><div><h3>Play Points</h3><p style="font-size:22px;color:#ffd45c">0</p></div><div><h3>Games Played</h3><p style="font-size:22px;color:#ffd45c">0</p></div><div><h3>Status</h3><p style="font-size:22px;color:#ffd45c">Active</p></div></div><div class="buttons" style="margin-top:22px"><a class="btn primary" href="#games" onclick="showPage('games')">GAMES</a><a class="btn outline" href="#profile" onclick="showPage('profile')">PROFILE</a></div></div></div></section>
-<section id="profile" class="page-view"><div class="container profile-wrap"><div class="profile-box"><div class="auth-icon">👤</div><h1>My Profile</h1><p class="sub">Account information structure</p><div class="profile-row"><small>FULL NAME</small><span>User Name</span></div><div class="profile-row"><small>EMAIL</small><span>user@example.com</span></div><div class="profile-row"><small>ACCOUNT STATUS</small><span>Active</span></div><div class="profile-row"><small>MEMBER SINCE</small><span>—</span></div><div class="buttons" style="margin-top:20px"><a class="btn outline" href="#dashboard" onclick="showPage('dashboard')">← DASHBOARD</a></div></div></div></section>
-<section id="game-1" class="page-view game-view"><div class="game-header"><div class="big-icon">🃏</div><span class="badge">DEMO GAME</span><h1>Royal Teen Patti</h1><p>Card Game — demo/play-money game structure.</p></div><div class="game-area"><div><div class="placeholder-icon">🃏</div><h2>Royal Teen Patti Game Area</h2><p>This is the structural placeholder. The actual demo interface can be added later.</p><div class="buttons"><button class="btn primary">START DEMO</button><a class="btn outline" href="#games" onclick="showPage('games')">ALL GAMES</a></div></div></div><div class="info"><div><h3>Game Information</h3><p>Game details section reserved.</p></div><div><h3>How To Play</h3><p>Instructions section reserved.</p></div><div><h3>Player Progress</h3><p>Progress section reserved.</p></div></div></section><section id="game-2" class="page-view game-view"><div class="game-header"><div class="big-icon">🎲</div><span class="badge">DEMO GAME</span><h1>Royal Ludo</h1><p>Board Game — demo/play-money game structure.</p></div><div class="game-area"><div><div class="placeholder-icon">🎲</div><h2>Royal Ludo Game Area</h2><p>This is the structural placeholder. The actual demo interface can be added later.</p><div class="buttons"><button class="btn primary">START DEMO</button><a class="btn outline" href="#games" onclick="showPage('games')">ALL GAMES</a></div></div></div><div class="info"><div><h3>Game Information</h3><p>Game details section reserved.</p></div><div><h3>How To Play</h3><p>Instructions section reserved.</p></div><div><h3>Player Progress</h3><p>Progress section reserved.</p></div></div></section><section id="game-3" class="page-view game-view"><div class="game-header"><div class="big-icon">🐉</div><span class="badge">DEMO GAME</span><h1>Dragon Fortune</h1><p>Slot — demo/play-money game structure.</p></div><div class="game-area"><div><div class="placeholder-icon">🐉</div><h2>Dragon Fortune Game Area</h2><p>This is the structural placeholder. The actual demo interface can be added later.</p><div class="buttons"><button class="btn primary">START DEMO</button><a class="btn outline" href="#games" onclick="showPage('games')">ALL GAMES</a></div></div></div><div class="info"><div><h3>Game Information</h3><p>Game details section reserved.</p></div><div><h3>How To Play</h3><p>Instructions section reserved.</p></div><div><h3>Player Progress</h3><p>Progress section reserved.</p></div></div></section><section id="game-4" class="page-view game-view"><div class="game-header"><div class="big-icon">👸</div><span class="badge">DEMO GAME</span><h1>Golden Goddess</h1><p>Slot — demo/play-money game structure.</p></div><div class="game-area"><div><div class="placeholder-icon">👸</div><h2>Golden Goddess Game Area</h2><p>This is the structural placeholder. The actual demo interface can be added later.</p><div class="buttons"><button class="btn primary">START DEMO</button><a class="btn outline" href="#games" onclick="showPage('games')">ALL GAMES</a></div></div></div><div class="info"><div><h3>Game Information</h3><p>Game details section reserved.</p></div><div><h3>How To Play</h3><p>Instructions section reserved.</p></div><div><h3>Player Progress</h3><p>Progress section reserved.</p></div></div></section><section id="game-5" class="page-view game-view"><div class="game-header"><div class="big-icon">🌳</div><span class="badge">DEMO GAME</span><h1>Lucky Tree</h1><p>Slot — demo/play-money game structure.</p></div><div class="game-area"><div><div class="placeholder-icon">🌳</div><h2>Lucky Tree Game Area</h2><p>This is the structural placeholder. The actual demo interface can be added later.</p><div class="buttons"><button class="btn primary">START DEMO</button><a class="btn outline" href="#games" onclick="showPage('games')">ALL GAMES</a></div></div></div><div class="info"><div><h3>Game Information</h3><p>Game details section reserved.</p></div><div><h3>How To Play</h3><p>Instructions section reserved.</p></div><div><h3>Player Progress</h3><p>Progress section reserved.</p></div></div></section><section id="game-6" class="page-view game-view"><div class="game-header"><div class="big-icon">🥚</div><span class="badge">DEMO GAME</span><h1>Mystic Egg</h1><p>Slot — demo/play-money game structure.</p></div><div class="game-area"><div><div class="placeholder-icon">🥚</div><h2>Mystic Egg Game Area</h2><p>This is the structural placeholder. The actual demo interface can be added later.</p><div class="buttons"><button class="btn primary">START DEMO</button><a class="btn outline" href="#games" onclick="showPage('games')">ALL GAMES</a></div></div></div><div class="info"><div><h3>Game Information</h3><p>Game details section reserved.</p></div><div><h3>How To Play</h3><p>Instructions section reserved.</p></div><div><h3>Player Progress</h3><p>Progress section reserved.</p></div></div></section><section id="game-7" class="page-view game-view"><div class="game-header"><div class="big-icon">🐯</div><span class="badge">DEMO GAME</span><h1>Fortune Tiger</h1><p>Slot — demo/play-money game structure.</p></div><div class="game-area"><div><div class="placeholder-icon">🐯</div><h2>Fortune Tiger Game Area</h2><p>This is the structural placeholder. The actual demo interface can be added later.</p><div class="buttons"><button class="btn primary">START DEMO</button><a class="btn outline" href="#games" onclick="showPage('games')">ALL GAMES</a></div></div></div><div class="info"><div><h3>Game Information</h3><p>Game details section reserved.</p></div><div><h3>How To Play</h3><p>Instructions section reserved.</p></div><div><h3>Player Progress</h3><p>Progress section reserved.</p></div></div></section><section id="game-8" class="page-view game-view"><div class="game-header"><div class="big-icon">🦁</div><span class="badge">DEMO GAME</span><h1>Royal Lion</h1><p>Slot — demo/play-money game structure.</p></div><div class="game-area"><div><div class="placeholder-icon">🦁</div><h2>Royal Lion Game Area</h2><p>This is the structural placeholder. The actual demo interface can be added later.</p><div class="buttons"><button class="btn primary">START DEMO</button><a class="btn outline" href="#games" onclick="showPage('games')">ALL GAMES</a></div></div></div><div class="info"><div><h3>Game Information</h3><p>Game details section reserved.</p></div><div><h3>How To Play</h3><p>Instructions section reserved.</p></div><div><h3>Player Progress</h3><p>Progress section reserved.</p></div></div></section><section id="game-9" class="page-view game-view"><div class="game-header"><div class="big-icon">🔥</div><span class="badge">DEMO GAME</span><h1>Phoenix Gold</h1><p>Slot — demo/play-money game structure.</p></div><div class="game-area"><div><div class="placeholder-icon">🔥</div><h2>Phoenix Gold Game Area</h2><p>This is the structural placeholder. The actual demo interface can be added later.</p><div class="buttons"><button class="btn primary">START DEMO</button><a class="btn outline" href="#games" onclick="showPage('games')">ALL GAMES</a></div></div></div><div class="info"><div><h3>Game Information</h3><p>Game details section reserved.</p></div><div><h3>How To Play</h3><p>Instructions section reserved.</p></div><div><h3>Player Progress</h3><p>Progress section reserved.</p></div></div></section><section id="game-10" class="page-view game-view"><div class="game-header"><div class="big-icon">🐼</div><span class="badge">DEMO GAME</span><h1>Lucky Panda</h1><p>Slot — demo/play-money game structure.</p></div><div class="game-area"><div><div class="placeholder-icon">🐼</div><h2>Lucky Panda Game Area</h2><p>This is the structural placeholder. The actual demo interface can be added later.</p><div class="buttons"><button class="btn primary">START DEMO</button><a class="btn outline" href="#games" onclick="showPage('games')">ALL GAMES</a></div></div></div><div class="info"><div><h3>Game Information</h3><p>Game details section reserved.</p></div><div><h3>How To Play</h3><p>Instructions section reserved.</p></div><div><h3>Player Progress</h3><p>Progress section reserved.</p></div></div></section><section id="game-11" class="page-view game-view"><div class="game-header"><div class="big-icon">✨</div><span class="badge">DEMO GAME</span><h1>Divine Fortune</h1><p>Slot — demo/play-money game structure.</p></div><div class="game-area"><div><div class="placeholder-icon">✨</div><h2>Divine Fortune Game Area</h2><p>This is the structural placeholder. The actual demo interface can be added later.</p><div class="buttons"><button class="btn primary">START DEMO</button><a class="btn outline" href="#games" onclick="showPage('games')">ALL GAMES</a></div></div></div><div class="info"><div><h3>Game Information</h3><p>Game details section reserved.</p></div><div><h3>How To Play</h3><p>Instructions section reserved.</p></div><div><h3>Player Progress</h3><p>Progress section reserved.</p></div></div></section><section id="game-12" class="page-view game-view"><div class="game-header"><div class="big-icon">🐲</div><span class="badge">DEMO GAME</span><h1>Golden Dragon</h1><p>Slot — demo/play-money game structure.</p></div><div class="game-area"><div><div class="placeholder-icon">🐲</div><h2>Golden Dragon Game Area</h2><p>This is the structural placeholder. The actual demo interface can be added later.</p><div class="buttons"><button class="btn primary">START DEMO</button><a class="btn outline" href="#games" onclick="showPage('games')">ALL GAMES</a></div></div></div><div class="info"><div><h3>Game Information</h3><p>Game details section reserved.</p></div><div><h3>How To Play</h3><p>Instructions section reserved.</p></div><div><h3>Player Progress</h3><p>Progress section reserved.</p></div></div></section><section id="game-13" class="page-view game-view"><div class="game-header"><div class="big-icon">🏛️</div><span class="badge">DEMO GAME</span><h1>Fortune Temple</h1><p>Slot — demo/play-money game structure.</p></div><div class="game-area"><div><div class="placeholder-icon">🏛️</div><h2>Fortune Temple Game Area</h2><p>This is the structural placeholder. The actual demo interface can be added later.</p><div class="buttons"><button class="btn primary">START DEMO</button><a class="btn outline" href="#games" onclick="showPage('games')">ALL GAMES</a></div></div></div><div class="info"><div><h3>Game Information</h3><p>Game details section reserved.</p></div><div><h3>How To Play</h3><p>Instructions section reserved.</p></div><div><h3>Player Progress</h3><p>Progress section reserved.</p></div></div></section><section id="game-14" class="page-view game-view"><div class="game-header"><div class="big-icon">🐒</div><span class="badge">DEMO GAME</span><h1>Monkey Treasure</h1><p>Slot — demo/play-money game structure.</p></div><div class="game-area"><div><div class="placeholder-icon">🐒</div><h2>Monkey Treasure Game Area</h2><p>This is the structural placeholder. The actual demo interface can be added later.</p><div class="buttons"><button class="btn primary">START DEMO</button><a class="btn outline" href="#games" onclick="showPage('games')">ALL GAMES</a></div></div></div><div class="info"><div><h3>Game Information</h3><p>Game details section reserved.</p></div><div><h3>How To Play</h3><p>Instructions section reserved.</p></div><div><h3>Player Progress</h3><p>Progress section reserved.</p></div></div></section><section id="game-15" class="page-view game-view"><div class="game-header"><div class="big-icon">🌲</div><span class="badge">DEMO GAME</span><h1>Magic Forest</h1><p>Slot — demo/play-money game structure.</p></div><div class="game-area"><div><div class="placeholder-icon">🌲</div><h2>Magic Forest Game Area</h2><p>This is the structural placeholder. The actual demo interface can be added later.</p><div class="buttons"><button class="btn primary">START DEMO</button><a class="btn outline" href="#games" onclick="showPage('games')">ALL GAMES</a></div></div></div><div class="info"><div><h3>Game Information</h3><p>Game details section reserved.</p></div><div><h3>How To Play</h3><p>Instructions section reserved.</p></div><div><h3>Player Progress</h3><p>Progress section reserved.</p></div></div></section><section id="game-16" class="page-view game-view"><div class="game-header"><div class="big-icon">💎</div><span class="badge">DEMO GAME</span><h1>Dragon's Treasure</h1><p>Slot — demo/play-money game structure.</p></div><div class="game-area"><div><div class="placeholder-icon">💎</div><h2>Dragon's Treasure Game Area</h2><p>This is the structural placeholder. The actual demo interface can be added later.</p><div class="buttons"><button class="btn primary">START DEMO</button><a class="btn outline" href="#games" onclick="showPage('games')">ALL GAMES</a></div></div></div><div class="info"><div><h3>Game Information</h3><p>Game details section reserved.</p></div><div><h3>How To Play</h3><p>Instructions section reserved.</p></div><div><h3>Player Progress</h3><p>Progress section reserved.</p></div></div></section><section id="game-17" class="page-view game-view"><div class="game-header"><div class="big-icon">👑</div><span class="badge">DEMO GAME</span><h1>Royal Fortune</h1><p>Slot — demo/play-money game structure.</p></div><div class="game-area"><div><div class="placeholder-icon">👑</div><h2>Royal Fortune Game Area</h2><p>This is the structural placeholder. The actual demo interface can be added later.</p><div class="buttons"><button class="btn primary">START DEMO</button><a class="btn outline" href="#games" onclick="showPage('games')">ALL GAMES</a></div></div></div><div class="info"><div><h3>Game Information</h3><p>Game details section reserved.</p></div><div><h3>How To Play</h3><p>Instructions section reserved.</p></div><div><h3>Player Progress</h3><p>Progress section reserved.</p></div></div></section><section id="game-18" class="page-view game-view"><div class="game-header"><div class="big-icon">🐉</div><span class="badge">DEMO GAME</span><h1>Royal Dragon Tiger</h1><p>Dragon Tiger — demo/play-money game structure.</p></div><div class="game-area"><div><div class="placeholder-icon">🐉</div><h2>Royal Dragon Tiger Game Area</h2><p>This is the structural placeholder. The actual demo interface can be added later.</p><div class="buttons"><button class="btn primary">START DEMO</button><a class="btn outline" href="#games" onclick="showPage('games')">ALL GAMES</a></div></div></div><div class="info"><div><h3>Game Information</h3><p>Game details section reserved.</p></div><div><h3>How To Play</h3><p>Instructions section reserved.</p></div><div><h3>Player Progress</h3><p>Progress section reserved.</p></div></div></section><section id="game-19" class="page-view game-view"><div class="game-header"><div class="big-icon">🐲</div><span class="badge">DEMO GAME</span><h1>Golden Dragon Tiger</h1><p>Dragon Tiger — demo/play-money game structure.</p></div><div class="game-area"><div><div class="placeholder-icon">🐲</div><h2>Golden Dragon Tiger Game Area</h2><p>This is the structural placeholder. The actual demo interface can be added later.</p><div class="buttons"><button class="btn primary">START DEMO</button><a class="btn outline" href="#games" onclick="showPage('games')">ALL GAMES</a></div></div></div><div class="info"><div><h3>Game Information</h3><p>Game details section reserved.</p></div><div><h3>How To Play</h3><p>Instructions section reserved.</p></div><div><h3>Player Progress</h3><p>Progress section reserved.</p></div></div></section><section id="game-20" class="page-view game-view"><div class="game-header"><div class="big-icon">🍀</div><span class="badge">DEMO GAME</span><h1>Fortune Dragon Tiger</h1><p>Dragon Tiger — demo/play-money game structure.</p></div><div class="game-area"><div><div class="placeholder-icon">🍀</div><h2>Fortune Dragon Tiger Game Area</h2><p>This is the structural placeholder. The actual demo interface can be added later.</p><div class="buttons"><button class="btn primary">START DEMO</button><a class="btn outline" href="#games" onclick="showPage('games')">ALL GAMES</a></div></div></div><div class="info"><div><h3>Game Information</h3><p>Game details section reserved.</p></div><div><h3>How To Play</h3><p>Instructions section reserved.</p></div><div><h3>Player Progress</h3><p>Progress section reserved.</p></div></div></section><section id="game-21" class="page-view game-view"><div class="game-header"><div class="big-icon">🔮</div><span class="badge">DEMO GAME</span><h1>Mystic Dragon Tiger</h1><p>Dragon Tiger — demo/play-money game structure.</p></div><div class="game-area"><div><div class="placeholder-icon">🔮</div><h2>Mystic Dragon Tiger Game Area</h2><p>This is the structural placeholder. The actual demo interface can be added later.</p><div class="buttons"><button class="btn primary">START DEMO</button><a class="btn outline" href="#games" onclick="showPage('games')">ALL GAMES</a></div></div></div><div class="info"><div><h3>Game Information</h3><p>Game details section reserved.</p></div><div><h3>How To Play</h3><p>Instructions section reserved.</p></div><div><h3>Player Progress</h3><p>Progress section reserved.</p></div></div></section><section id="game-22" class="page-view game-view"><div class="game-header"><div class="big-icon">🎡</div><span class="badge">DEMO GAME</span><h1>Fortune Wheel</h1><p>Wheel — demo/play-money game structure.</p></div><div class="game-area"><div><div class="placeholder-icon">🎡</div><h2>Fortune Wheel Game Area</h2><p>This is the structural placeholder. The actual demo interface can be added later.</p><div class="buttons"><button class="btn primary">START DEMO</button><a class="btn outline" href="#games" onclick="showPage('games')">ALL GAMES</a></div></div></div><div class="info"><div><h3>Game Information</h3><p>Game details section reserved.</p></div><div><h3>How To Play</h3><p>Instructions section reserved.</p></div><div><h3>Player Progress</h3><p>Progress section reserved.</p></div></div></section><section id="game-23" class="page-view game-view"><div class="game-header"><div class="big-icon">👑</div><span class="badge">DEMO GAME</span><h1>Royal Wheel</h1><p>Wheel — demo/play-money game structure.</p></div><div class="game-area"><div><div class="placeholder-icon">👑</div><h2>Royal Wheel Game Area</h2><p>This is the structural placeholder. The actual demo interface can be added later.</p><div class="buttons"><button class="btn primary">START DEMO</button><a class="btn outline" href="#games" onclick="showPage('games')">ALL GAMES</a></div></div></div><div class="info"><div><h3>Game Information</h3><p>Game details section reserved.</p></div><div><h3>How To Play</h3><p>Instructions section reserved.</p></div><div><h3>Player Progress</h3><p>Progress section reserved.</p></div></div></section><section id="game-24" class="page-view game-view"><div class="game-header"><div class="big-icon">🪙</div><span class="badge">DEMO GAME</span><h1>Golden Wheel</h1><p>Wheel — demo/play-money game structure.</p></div><div class="game-area"><div><div class="placeholder-icon">🪙</div><h2>Golden Wheel Game Area</h2><p>This is the structural placeholder. The actual demo interface can be added later.</p><div class="buttons"><button class="btn primary">START DEMO</button><a class="btn outline" href="#games" onclick="showPage('games')">ALL GAMES</a></div></div></div><div class="info"><div><h3>Game Information</h3><p>Game details section reserved.</p></div><div><h3>How To Play</h3><p>Instructions section reserved.</p></div><div><h3>Player Progress</h3><p>Progress section reserved.</p></div></div></section><section id="game-25" class="page-view game-view"><div class="game-header"><div class="big-icon">🍀</div><span class="badge">DEMO GAME</span><h1>Lucky Wheel</h1><p>Wheel — demo/play-money game structure.</p></div><div class="game-area"><div><div class="placeholder-icon">🍀</div><h2>Lucky Wheel Game Area</h2><p>This is the structural placeholder. The actual demo interface can be added later.</p><div class="buttons"><button class="btn primary">START DEMO</button><a class="btn outline" href="#games" onclick="showPage('games')">ALL GAMES</a></div></div></div><div class="info"><div><h3>Game Information</h3><p>Game details section reserved.</p></div><div><h3>How To Play</h3><p>Instructions section reserved.</p></div><div><h3>Player Progress</h3><p>Progress section reserved.</p></div></div></section><section id="game-26" class="page-view game-view"><div class="game-header"><div class="big-icon">🎯</div><span class="badge">DEMO GAME</span><h1>Wheel of Fortune</h1><p>Wheel — demo/play-money game structure.</p></div><div class="game-area"><div><div class="placeholder-icon">🎯</div><h2>Wheel of Fortune Game Area</h2><p>This is the structural placeholder. The actual demo interface can be added later.</p><div class="buttons"><button class="btn primary">START DEMO</button><a class="btn outline" href="#games" onclick="showPage('games')">ALL GAMES</a></div></div></div><div class="info"><div><h3>Game Information</h3><p>Game details section reserved.</p></div><div><h3>How To Play</h3><p>Instructions section reserved.</p></div><div><h3>Player Progress</h3><p>Progress section reserved.</p></div></div></section>
+  <!-- Home View -->
+  <section id="home" class="page-view active">
+    <div class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="badge">WELCOME TO ROYAL SLOT 777</span>
+          <h1>Enter The <span>Royal</span><br>Gaming World</h1>
+          <p class="hero-text">Explore a modern gaming-style website with a premium interface, exciting demo games and a smooth mobile-friendly experience.</p>
+          <div class="buttons">
+            <a class="btn primary" href="#games">Explore Games</a>
+            <a class="btn outline" href="#how">How It Works</a>
+          </div>
+        </div>
+        <div class="hero-box">
+          <div>
+            <div class="crown">👑</div>
+            <h2>ROYAL SLOT 777</h2>
+            <p>Premium Gaming Experience</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="block" id="games-home">
+      <div class="container">
+        <div class="heading">
+          <small>GAME COLLECTION</small>
+          <h2>Explore The Games</h2>
+          <p>All games are arranged in a responsive grid.</p>
+        </div>
+        <div class="games-grid" id="home-grid"></div>
+      </div>
+    </section>
+
+    <section class="block" id="features">
+      <div class="container">
+        <div class="heading">
+          <small>FEATURES</small>
+          <h2>Why Choose Royal Slot 777?</h2>
+        </div>
+        <div class="features">
+          <div class="feature"><div class="feature-icon">📱</div><h3>Mobile Friendly</h3><p>Responsive design for phone, tablet and desktop.</p></div>
+          <div class="feature"><div class="feature-icon">⚡</div><h3>Fast & Lightweight</h3><p>Simple frontend structure.</p></div>
+          <div class="feature"><div class="feature-icon">🎮</div><h3>Game Collection</h3><p>Multiple demo game pages ready.</p></div>
+          <div class="feature"><div class="feature-icon">🔐</div><h3>Clean Design</h3><p>Modern dark royal interface.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="how">
+      <div class="container">
+        <div class="heading">
+          <small>SIMPLE PROCESS</small>
+          <h2>How It Works</h2>
+        </div>
+        <div class="steps">
+          <div class="step"><div class="number">01</div><h3>Create Account</h3><p>Account structure is ready for future integration.</p></div>
+          <div class="step"><div class="number">02</div><h3>Choose A Game</h3><p>Browse the complete collection.</p></div>
+          <div class="step"><div class="number">03</div><h3>Start Demo</h3><p>Open a game structure.</p></div>
+          <div class="step"><div class="number">04</div><h3>Track Progress</h3><p>Future demo progress can be added.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="faq">
+      <div class="container">
+        <div class="heading">
+          <small>FAQ</small>
+          <h2>Frequently Asked Questions</h2>
+        </div>
+        <div class="faq">
+          <div class="faq-item"><h3>What is Royal Slot 777?</h3><p>A gaming-style frontend/demo website concept.</p></div>
+          <div class="faq-item"><h3>Can more games be added?</h3><p>Yes. The structure is designed to expand.</p></div>
+          <div class="faq-item"><h3>Can the icons be changed?</h3><p>Yes. Temporary icons can later be replaced with custom 3D artwork.</p></div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- All Games View -->
+  <section id="games" class="page-view">
+    <div class="container" style="padding:60px 0">
+      <div class="heading">
+        <small>ALL GAMES</small>
+        <h2>Royal Game Collection</h2>
+        <p>Choose any demo game below.</p>
+      </div>
+      <div class="games-grid" id="all-games-grid"></div>
+    </div>
+  </section>
+
+  <!-- Login View -->
+  <section id="login" class="page-view">
+    <div class="container auth-wrap">
+      <div class="auth-box">
+        <div class="auth-icon">👑</div>
+        <h1>Welcome Back</h1>
+        <p class="sub">Login page structure</p>
+        <form onsubmit="return false">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" placeholder="Enter your email">
+          <label for="login-pass">Password</label>
+          <input type="password" id="login-pass" placeholder="Enter your password">
+          <button class="btn primary" type="submit">LOGIN</button>
+        </form>
+        <div class="links">Don't have an account? <a href="#register">Create Account</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Register View -->
+  <section id="register" class="page-view">
+    <div class="container auth-wrap">
+      <div class="auth-box">
+        <div class="auth-icon">👑</div>
+        <h1>Create Account</h1>
+        <p class="sub">Registration page structure</p>
+        <form onsubmit="return false">
+          <label for="reg-name">Full Name</label>
+          <input type="text" id="reg-name" placeholder="Enter your name">
+          <label for="reg-email">Email</label>
+          <input type="email" id="reg-email" placeholder="Enter your email">
+          <label for="reg-pass">Password</label>
+          <input type="password" id="reg-pass" placeholder="Create password">
+          <label for="reg-cpass">Confirm Password</label>
+          <input type="password" id="reg-cpass" placeholder="Confirm password">
+          <button class="btn primary" type="submit">CREATE ACCOUNT</button>
+        </form>
+        <div class="links">Already have an account? <a href="#login">Login</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dashboard View -->
+  <section id="dashboard" class="page-view">
+    <div class="container profile-wrap">
+      <div class="profile-box">
+        <div class="auth-icon">👑</div>
+        <h1>Dashboard</h1>
+        <p class="sub">Account overview structure</p>
+        <div class="info" style="grid-template-columns: repeat(3, 1fr); margin-top: 0;">
+          <div><h3>Play Points</h3><p style="font-size:22px;color:#ffd45c">0</p></div>
+          <div><h3>Games Played</h3><p style="font-size:22px;color:#ffd45c">0</p></div>
+          <div><h3>Status</h3><p style="font-size:22px;color:#ffd45c">Active</p></div>
+        </div>
+        <div class="buttons" style="margin-top:22px">
+          <a class="btn primary" href="#games">GAMES</a>
+          <a class="btn outline" href="#profile">PROFILE</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Profile View -->
+  <section id="profile" class="page-view">
+    <div class="container profile-wrap">
+      <div class="profile-box">
+        <div class="auth-icon">👤</div>
+        <h1>My Profile</h1>
+        <p class="sub">Account information structure</p>
+        <div class="profile-row"><small>FULL NAME</small><span>User Name</span></div>
+        <div class="profile-row"><small>EMAIL</small><span>user@example.com</span></div>
+        <div class="profile-row"><small>ACCOUNT STATUS</small><span>Active</span></div>
+        <div class="profile-row"><small>MEMBER SINCE</small><span>—</span></div>
+        <div class="buttons" style="margin-top:20px">
+          <a class="btn outline" href="#dashboard">← DASHBOARD</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dynamic Game Single-View -->
+  <section id="game-view" class="page-view game-view">
+    <div class="container">
+      <div class="game-header">
+        <div class="big-icon" id="gv-icon">🎮</div>
+        <span class="badge" id="gv-tag">DEMO GAME</span>
+        <h1 id="gv-title">Game Title</h1>
+        <p id="gv-desc">Demo game structure.</p>
+      </div>
+      <div class="game-area">
+        <div>
+          <div class="placeholder-icon" id="gv-inner-icon">🎮</div>
+          <h2 id="gv-area-title">Game Area</h2>
+          <p>This is the structural placeholder. The actual demo interface can be connected here.</p>
+          <div class="buttons">
+            <button class="btn primary" type="button">START DEMO</button>
+            <a class="btn outline" href="#games">ALL GAMES</a>
+          </div>
+        </div>
+      </div>
+      <div class="info">
+        <div><h3>Game Information</h3><p>Game details section reserved.</p></div>
+        <div><h3>How To Play</h3><p>Instructions section reserved.</p></div>
+        <div><h3>Player Progress</h3><p>Progress section reserved.</p></div>
+      </div>
+    </div>
+  </section>
 </main>
+
 <p class="notice">Structure/demo version only. No real-money betting, deposits, withdrawals, payment processing, or gambling functionality is connected.</p>
 <footer>© 2026 Royal Slot 777. All rights reserved.</footer>
+
 <script>
-function showPage(id){
-  document.querySelectorAll('.page-view').forEach(p=>p.classList.remove('active'));
-  const page=document.getElementById(id);
-  if(page) page.classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
+const gamesData = [
+  { id: 1, title: 'Royal Teen Patti', tag: 'Card Game', icon: '🃏' },
+  { id: 2, title: 'Royal Ludo', tag: 'Board Game', icon: '🎲' },
+  { id: 3, title: 'Dragon Fortune', tag: 'Slot', icon: '🐉' },
+  { id: 4, title: 'Golden Goddess', tag: 'Slot', icon: '👸' },
+  { id: 5, title: 'Lucky Tree', tag: 'Slot', icon: '🌳' },
+  { id: 6, title: 'Mystic Egg', tag: 'Slot', icon: '🥚' },
+  { id: 7, title: 'Fortune Tiger', tag: 'Slot', icon: '🐯' },
+  { id: 8, title: 'Royal Lion', tag: 'Slot', icon: '🦁' },
+  { id: 9, title: 'Phoenix Gold', tag: 'Slot', icon: '🔥' },
+  { id: 10, title: 'Lucky Panda', tag: 'Slot', icon: '🐼' },
+  { id: 11, title: 'Divine Fortune', tag: 'Slot', icon: '✨' },
+  { id: 12, title: 'Golden Dragon', tag: 'Slot', icon: '🐲' },
+  { id: 13, title: 'Fortune Temple', tag: 'Slot', icon: '🏛️' },
+  { id: 14, title: 'Monkey Treasure', tag: 'Slot', icon: '🐒' },
+  { id: 15, title: 'Magic Forest', tag: 'Slot', icon: '🌲' },
+  { id: 16, title: "Dragon's Treasure", tag: 'Slot', icon: '💎' },
+  { id: 17, title: 'Royal Fortune', tag: 'Slot', icon: '👑' },
+  { id: 18, title: 'Royal Dragon Tiger', tag: 'Dragon Tiger', icon: '🐉' },
+  { id: 19, title: 'Golden Dragon Tiger', tag: 'Dragon Tiger', icon: '🐲' },
+  { id: 20, title: 'Fortune Dragon Tiger', tag: 'Dragon Tiger', icon: '🍀' },
+  { id: 21, title: 'Mystic Dragon Tiger', tag: 'Dragon Tiger', icon: '🔮' },
+  { id: 22, title: 'Fortune Wheel', tag: 'Wheel', icon: '🎡' },
+  { id: 23, title: 'Royal Wheel', tag: 'Wheel', icon: '👑' },
+  { id: 24, title: 'Golden Wheel', tag: 'Wheel', icon: '🪙' },
+  { id: 25, title: 'Lucky Wheel', tag: 'Wheel', icon: '🍀' },
+  { id: 26, title: 'Wheel of Fortune', tag: 'Wheel', icon: '🎯' }
+];
+
+// Cards render function
+function renderGameCards(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.innerHTML = gamesData.map(g => `
+    <a class="game-card" href="#game-${g.id}">
+      <div class="game-icon"><span>${g.icon}</span></div>
+      <div class="game-info">
+        <span class="tag">${g.tag}</span>
+        <h3>${g.title}</h3>
+        <span class="play-btn">PLAY</span>
+      </div>
+    </a>
+  `).join('');
 }
-function route(){
-  let id=location.hash.replace('#','') || 'home';
-  if(!document.getElementById(id)) id='home';
-  showPage(id);
+
+// Switch active view
+function showPage(id) {
+  document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
+  const page = document.getElementById(id);
+  if (page) page.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-window.addEventListener('hashchange',route); route();
+
+// Central URL Hash Router
+function route() {
+  const hash = location.hash.replace('#', '') || 'home';
+
+  // 1. In-page scroll handling for home sections (#how, #faq, #features)
+  const anchor = document.getElementById(hash);
+  if (anchor && !anchor.classList.contains('page-view')) {
+    showPage('home');
+    setTimeout(() => anchor.scrollIntoView({ behavior: 'smooth' }), 50);
+    return;
+  }
+
+  // 2. Dynamic single game routing (#game-1 to #game-26)
+  if (hash.startsWith('game-')) {
+    const gameId = parseInt(hash.replace('game-', ''), 10);
+    const game = gamesData.find(g => g.id === gameId);
+    if (game) {
+      document.getElementById('gv-icon').textContent = game.icon;
+      document.getElementById('gv-inner-icon').textContent = game.icon;
+      document.getElementById('gv-tag').textContent = game.tag.toUpperCase();
+      document.getElementById('gv-title').textContent = game.title;
+      document.getElementById('gv-area-title').textContent = `${game.title} Game Area`;
+      document.getElementById('gv-desc').textContent = `${game.tag} — demo/play-money game structure.`;
+      showPage('game-view');
+      return;
+    }
+  }
+
+  // 3. Normal page views
+  if (anchor && anchor.classList.contains('page-view')) {
+    showPage(hash);
+  } else {
+    showPage('home');
+  }
+}
+
+// Initial setup
+renderGameCards('home-grid');
+renderGameCards('all-games-grid');
+window.addEventListener('hashchange', route);
+route();
 </script>
-</body></html>
+</body>
+</html>
