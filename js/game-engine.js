@@ -88,18 +88,6 @@ function buildArena(g) {
         </div>
       </div>
     `;
-  } else if (g.engine === 'teenpatti') {
-    actionBtn.textContent = 'DEAL HAND';
-    container.innerHTML = `
-      <div class="tp-table">
-        <p style="text-align:center; color:var(--gold-primary); font-size:12px; font-weight:800">PLAYER'S 3-CARD HAND</p>
-        <div class="tp-hand">
-          <div class="tp-card" id="tp-c1">🂠</div>
-          <div class="tp-card" id="tp-c2">🂠</div>
-          <div class="tp-card" id="tp-c3">🂠</div>
-        </div>
-      </div>
-    `;
   } else {
     actionBtn.textContent = 'SPIN REELS';
     const s = g.symbols || ['👑','💎','🔥','🍀','🪙'];
@@ -128,7 +116,6 @@ function executeGamePlay() {
   if (activeGame.engine === 'dragontiger') playDragonTiger();
   else if (activeGame.engine === 'ludo') playLudo();
   else if (activeGame.engine === 'wheel') playWheel();
-  else if (activeGame.engine === 'teenpatti') playTeenPatti();
   else playSlots();
 }
 
@@ -440,3 +427,380 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
 });
+// ================= ADVANCED TEEN PATTI ENGINE =================
+let tpState = {
+  pot: 0,
+  currentBet: 50,
+  seen: false,
+  packed: false,
+  turn: 'player', // 'player', 'bot1', 'bot2'
+  inRound: false,
+  players: {
+    player: { name: 'You', cards: [], chips: 0, packed: false, seen: false },
+    bot1: { name: 'Vikram (AI)', cards: [], chips: 15000, packed: false, seen: false },
+    bot2: { name: 'Priya (AI)', cards: [], chips: 18000, packed: false, seen: false }
+  }
+};
+
+// Hand Ranking Constants
+const TP_SUITS = ['♠', '♥', '♦', '♣'];
+const TP_RANKS = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+
+// Replace existing Teen Patti injection inside buildArena(g)
+function setupTeenPattiArena() {
+  const container = document.getElementById('dynamic-arena');
+  document.querySelector('.controls-bar').style.display = 'none'; // Hide generic controls
+
+  container.innerHTML = `
+    <div class="tp-felt-table">
+      <div class="tp-opponents">
+        <div class="tp-seat" id="seat-bot1">
+          <div class="tp-bubble" id="bubble-bot1">Chaal 50</div>
+          <div class="tp-seat-avatar">🧔🏽</div>
+          <div class="tp-cards-row" id="cards-bot1">
+            <div class="card-3d back"></div>
+            <div class="card-3d back"></div>
+            <div class="card-3d back"></div>
+          </div>
+          <div class="tp-seat-info">
+            <b>Vikram</b><br>
+            <span class="gold-text" id="chips-bot1">🪙 15,000</span>
+          </div>
+        </div>
+
+        <div class="tp-seat" id="seat-bot2">
+          <div class="tp-bubble" id="bubble-bot2">Chaal 50</div>
+          <div class="tp-seat-avatar">👩🏻</div>
+          <div class="tp-cards-row" id="cards-bot2">
+            <div class="card-3d back"></div>
+            <div class="card-3d back"></div>
+            <div class="card-3d back"></div>
+          </div>
+          <div class="tp-seat-info">
+            <b>Priya</b><br>
+            <span class="gold-text" id="chips-bot2">🪙 18,000</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tp-pot-center">
+        <div class="tp-pot-label">TOTAL POT</div>
+        <div class="tp-pot-val" id="tp-pot-display">🪙 150</div>
+      </div>
+
+      <div class="tp-player-area">
+        <div class="tp-cards-row" id="cards-player">
+          <div class="card-3d back"></div>
+          <div class="card-3d back"></div>
+          <div class="card-3d back"></div>
+        </div>
+
+        <div class="tp-action-grid">
+          <button class="btn-tp btn-pack" id="tp-btn-pack" onclick="tpPlayerPack()">PACK (FOLD)</button>
+          <button class="btn-tp btn-see" id="tp-btn-see" onclick="tpPlayerSee()">SEE CARDS</button>
+          <button class="btn-tp btn-chaal" id="tp-btn-chaal" onclick="tpPlayerChaal()">CHAAL (50)</button>
+          <button class="btn-tp btn-show" id="tp-btn-show" onclick="tpShowdown()">SHOW</button>
+          <button class="btn-tp btn-chaal" id="tp-btn-start" style="display:none; background:#2ecc71" onclick="startTeenPattiRound()">NEW ROUND</button>
+        </div>
+      </div>
+    </div>
+  `;
+  startTeenPattiRound();
+}
+
+// Generate & Shuffle Deck
+function getTPDeck() {
+  const deck = [];
+  for (let s of TP_SUITS) {
+    for (let i = 0; i < TP_RANKS.length; i++) {
+      deck.push({ rank: TP_RANKS[i], val: i + 2, suit: s });
+    }
+  }
+  return deck.sort(() => Math.random() - 0.5);
+}
+
+// Start Round
+function startTeenPattiRound() {
+  if (credits < 50) {
+    setStatus('Insufficient Credits for Boot Amount (50)!', false);
+    return;
+  }
+
+  // Deduct Boot (₹50 each)
+  credits -= 50;
+  tpState.players.bot1.chips -= 50;
+  tpState.players.bot2.chips -= 50;
+  tpState.pot = 150;
+  tpState.currentBet = 50;
+  tpState.seen = false;
+  tpState.packed = false;
+  tpState.inRound = true;
+  tpState.players.bot1.packed = false;
+  tpState.players.bot2.packed = false;
+  tpState.players.bot1.seen = false;
+  tpState.players.bot2.seen = false;
+
+  syncCredits();
+  updateTPElements();
+
+  const deck = getTPDeck();
+  tpState.players.player.cards = [deck.pop(), deck.pop(), deck.pop()];
+  tpState.players.bot1.cards = [deck.pop(), deck.pop(), deck.pop()];
+  tpState.players.bot2.cards = [deck.pop(), deck.pop(), deck.pop()];
+
+  // Reset Card UI
+  renderTPPlayerCards(false);
+  document.getElementById('cards-bot1').innerHTML = `<div class="card-3d back"></div><div class="card-3d back"></div><div class="card-3d back"></div>`;
+  document.getElementById('cards-bot2').innerHTML = `<div class="card-3d back"></div><div class="card-3d back"></div><div class="card-3d back"></div>`;
+
+  // Button States
+  document.getElementById('tp-btn-start').style.display = 'none';
+  document.getElementById('tp-btn-pack').style.display = 'inline-block';
+  document.getElementById('tp-btn-see').style.display = 'inline-block';
+  document.getElementById('tp-btn-chaal').style.display = 'inline-block';
+  document.getElementById('tp-btn-show').style.display = 'inline-block';
+
+  setStatus('Boot ₹50 collected. Your Turn! Play Blind or See Cards.', false);
+  setTurn('player');
+}
+
+function updateTPElements() {
+  document.getElementById('tp-pot-display').textContent = `🪙 ${tpState.pot.toLocaleString()}`;
+  document.getElementById('chips-bot1').textContent = `🪙 ${tpState.players.bot1.chips.toLocaleString()}`;
+  document.getElementById('chips-bot2').textContent = `🪙 ${tpState.players.bot2.chips.toLocaleString()}`;
+  const betAmt = tpState.seen ? tpState.currentBet * 2 : tpState.currentBet;
+  document.getElementById('tp-btn-chaal').textContent = `CHAAL (${betAmt})`;
+}
+
+function renderTPPlayerCards(revealed) {
+  const container = document.getElementById('cards-player');
+  if (!revealed) {
+    container.innerHTML = `<div class="card-3d back"></div><div class="card-3d back"></div><div class="card-3d back"></div>`;
+  } else {
+    container.innerHTML = tpState.players.player.cards.map(c => {
+      const isRed = c.suit === '♥' || c.suit === '♦';
+      return `
+        <div class="card-3d ${isRed ? 'red' : 'black'}">
+          <div>${c.rank}</div>
+          <div style="text-align:center; font-size:22px">${c.suit}</div>
+          <div style="text-align:right">${c.rank}</div>
+        </div>
+      `;
+    }).join('');
+  }
+}
+
+function tpPlayerSee() {
+  if (tpState.seen) return;
+  tpState.seen = true;
+  renderTPPlayerCards(true);
+  document.getElementById('tp-btn-see').style.display = 'none';
+  updateTPElements();
+  setStatus('Cards revealed! Chaal amount is now 2x.', false);
+}
+
+function tpPlayerChaal() {
+  if (!tpState.inRound) return;
+  const cost = tpState.seen ? tpState.currentBet * 2 : tpState.currentBet;
+  if (credits < cost) {
+    setStatus('Insufficient Credits for Chaal!', false);
+    return;
+  }
+  credits -= cost;
+  tpState.pot += cost;
+  syncCredits();
+  updateTPElements();
+  setStatus('You placed Chaal. Bot turns commencing...', false);
+  setTurn('bot1');
+  setTimeout(runBot1Turn, 1000);
+}
+
+function tpPlayerPack() {
+  tpState.packed = true;
+  tpState.inRound = false;
+  setStatus('You packed (folded). Vikram & Priya will fight for the pot!', false);
+  endTPOptions();
+}
+
+function setTurn(turn) {
+  tpState.turn = turn;
+  document.getElementById('seat-bot1').classList.toggle('turn', turn === 'bot1');
+  document.getElementById('seat-bot2').classList.toggle('turn', turn === 'bot2');
+  const btns = ['tp-btn-pack', 'tp-btn-see', 'tp-btn-chaal', 'tp-btn-show'];
+  btns.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.disabled = (turn !== 'player');
+  });
+}
+
+function botBubble(botId, msg) {
+  const b = document.getElementById(`bubble-${botId}`);
+  b.textContent = msg;
+  b.style.display = 'block';
+  setTimeout(() => { b.style.display = 'none'; }, 1800);
+}
+
+// Bot 1 AI
+function runBot1Turn() {
+  if (tpState.players.bot1.packed) {
+    setTurn('bot2');
+    setTimeout(runBot2Turn, 800);
+    return;
+  }
+  const score = evaluateHand(tpState.players.bot1.cards).score;
+  const cost = tpState.currentBet;
+
+  if (score < 150 && Math.random() < 0.25) {
+    tpState.players.bot1.packed = true;
+    botBubble('bot1', 'PACK');
+  } else {
+    tpState.players.bot1.chips -= cost;
+    tpState.pot += cost;
+    botBubble('bot1', `CHAAL ${cost}`);
+  }
+  updateTPElements();
+  setTurn('bot2');
+  setTimeout(runBot2Turn, 1000);
+}
+
+// Bot 2 AI
+function runBot2Turn() {
+  if (tpState.players.bot2.packed) {
+    setTurn('player');
+    return;
+  }
+  const score = evaluateHand(tpState.players.bot2.cards).score;
+  const cost = tpState.currentBet;
+
+  if (score < 140 && Math.random() < 0.3) {
+    tpState.players.bot2.packed = true;
+    botBubble('bot2', 'PACK');
+  } else {
+    tpState.players.bot2.chips -= cost;
+    tpState.pot += cost;
+    botBubble('bot2', `CHAAL ${cost}`);
+  }
+  updateTPElements();
+
+  // Check if both bots packed
+  if (tpState.players.bot1.packed && tpState.players.bot2.packed && !tpState.packed) {
+    credits += tpState.pot;
+    syncCredits();
+    setStatus(`🎉 ALL BOTS PACKED! You won the Pot of 🪙 ${tpState.pot}!`, true);
+    endTPOptions();
+    return;
+  }
+
+  setTurn('player');
+  setStatus('Your Turn! Chaal or Show?', false);
+}
+
+// Hand Evaluator (Trio > Pure Seq > Seq > Color > Pair > High Card)
+function evaluateHand(cards) {
+  const c = [...cards].sort((a, b) => b.val - a.val);
+  const isFlush = (c[0].suit === c[1].suit && c[1].suit === c[2].suit);
+  const isSeq = (c[0].val - c[1].val === 1 && c[1].val - c[2].val === 1) || 
+                (c[0].val === 14 && c[1].val === 3 && c[2].val === 2); // A-2-3
+
+  // 1. Trail / Trio
+  if (c[0].val === c[1].val && c[1].val === c[2].val) {
+    return { name: `Trio of ${c[0].rank}s`, score: 5000 + c[0].val };
+  }
+  // 2. Pure Sequence
+  if (isFlush && isSeq) {
+    return { name: 'Pure Sequence (Straight Flush)', score: 4000 + c[0].val };
+  }
+  // 3. Normal Sequence
+  if (isSeq) {
+    return { name: 'Sequence (Straight)', score: 3000 + c[0].val };
+  }
+  // 4. Color / Flush
+  if (isFlush) {
+    return { name: 'Color (Flush)', score: 2000 + c[0].val };
+  }
+  // 5. Pair
+  if (c[0].val === c[1].val || c[1].val === c[2].val || c[0].val === c[2].val) {
+    const pairVal = (c[0].val === c[1].val) ? c[0].val : c[2].val;
+    return { name: `Pair of ${pairVal}`, score: 1000 + pairVal };
+  }
+  // 6. High Card
+  return { name: `High Card ${c[0].rank}`, score: c[0].val * 10 + c[1].val };
+}
+
+// Showdown Calculation
+function tpShowdown() {
+  tpState.inRound = false;
+
+  // Reveal Bot Cards
+  revealBotCards('cards-bot1', tpState.players.bot1.cards);
+  revealBotCards('cards-bot2', tpState.players.bot2.cards);
+  renderTPPlayerCards(true);
+
+  const pHand = evaluateHand(tpState.players.player.cards);
+  const b1Hand = evaluateHand(tpState.players.bot1.cards);
+  const b2Hand = evaluateHand(tpState.players.bot2.cards);
+
+  let winner = 'player';
+  let bestScore = tpState.packed ? -1 : pHand.score;
+  let winningDesc = pHand.name;
+
+  if (!tpState.players.bot1.packed && b1Hand.score > bestScore) {
+    winner = 'bot1';
+    bestScore = b1Hand.score;
+    winningDesc = `Vikram with ${b1Hand.name}`;
+  }
+  if (!tpState.players.bot2.packed && b2Hand.score > bestScore) {
+    winner = 'bot2';
+    bestScore = b2Hand.score;
+    winningDesc = `Priya with ${b2Hand.name}`;
+  }
+
+  if (winner === 'player') {
+    credits += tpState.pot;
+    syncCredits();
+    setStatus(`🏆 YOU WON THE POT! ${winningDesc} (+🪙 ${tpState.pot.toLocaleString()})`, true);
+  } else {
+    setStatus(`Winner: ${winningDesc}. Better luck next time!`, false);
+  }
+
+  endTPOptions();
+}
+
+function revealBotCards(containerId, cards) {
+  document.getElementById(containerId).innerHTML = cards.map(c => {
+    const isRed = c.suit === '♥' || c.suit === '♦';
+    return `
+      <div class="card-3d ${isRed ? 'red' : 'black'}">
+        <div>${c.rank}</div>
+        <div style="text-align:center; font-size:22px">${c.suit}</div>
+        <div style="text-align:right">${c.rank}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function endTPOptions() {
+  document.getElementById('tp-btn-pack').style.display = 'none';
+  document.getElementById('tp-btn-see').style.display = 'none';
+  document.getElementById('tp-btn-chaal').style.display = 'none';
+  document.getElementById('tp-btn-show').style.display = 'none';
+  document.getElementById('tp-btn-start').style.display = 'inline-block';
+}
+
+// Hook Teen Patti setup in launchGame
+const defaultLaunchGame = launchGame;
+launchGame = function(id) {
+  const g = gamesData.find(item => item.id === id);
+  if (!g) return;
+
+  if (g.engine === 'teenpatti') {
+    activeGame = g;
+    document.getElementById('stage-title').textContent = g.title;
+    document.getElementById('stage-tag').textContent = g.tag.toUpperCase();
+    setupTeenPattiArena();
+    showPage('game');
+  } else {
+    document.querySelector('.controls-bar').style.display = 'flex';
+    defaultLaunchGame(id);
+  }
+};
