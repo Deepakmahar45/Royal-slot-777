@@ -389,3 +389,54 @@ document.getElementById('home-grid').innerHTML = gamesData.slice(0, 8).map(creat
 renderLobby();
 syncCredits();
 showPage('home');
+// Profile Avatar & State Logic
+const avatars = ['A', '👑', '🦁', '🐉', '🐯', '💎'];
+let currentAvatarIdx = 0;
+
+function cycleAvatar() {
+  currentAvatarIdx = (currentAvatarIdx + 1) % avatars.length;
+  const newAvatar = avatars[currentAvatarIdx];
+  
+  document.getElementById('profile-avatar-display').textContent = newAvatar;
+  document.querySelector('.avatar-small').textContent = newAvatar;
+  localStorage.setItem('royal_avatar', newAvatar);
+  showToast(`Avatar updated to: ${newAvatar}`);
+}
+
+function saveProfileChanges() {
+  const fName = document.getElementById('prof-fname').value.trim() || 'Alex';
+  const lName = document.getElementById('prof-lname').value.trim() || 'Morgan';
+  const fullName = `${fName} ${lName}`;
+
+  document.getElementById('user-display-name').textContent = fullName;
+  localStorage.setItem('royal_username', fullName);
+  showToast('✓ Profile changes saved successfully!');
+}
+
+function clearDemoData() {
+  if (confirm('Are you sure you want to reset all demo progress and credits?')) {
+    localStorage.clear();
+    credits = 10000;
+    syncCredits();
+    showToast('✓ Cache cleared! Restarting sandbox...');
+    setTimeout(() => location.reload(), 1000);
+  }
+}
+
+// Load saved profile data on startup
+window.addEventListener('DOMContentLoaded', () => {
+  const savedName = localStorage.getItem('royal_username');
+  const savedAvatar = localStorage.getItem('royal_avatar');
+
+  if (savedName && document.getElementById('user-display-name')) {
+    document.getElementById('user-display-name').textContent = savedName;
+  }
+  if (savedAvatar) {
+    if (document.getElementById('profile-avatar-display')) {
+      document.getElementById('profile-avatar-display').textContent = savedAvatar;
+    }
+    if (document.querySelector('.avatar-small')) {
+      document.querySelector('.avatar-small').textContent = savedAvatar;
+    }
+  }
+});
