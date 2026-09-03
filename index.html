@@ -139,15 +139,139 @@
       </div>
     </section>
 
+        <!-- 5. Profile Section -->
     <section id="view-profile" class="page-view">
-      <div class="section-banner">
-        <h1>Profile & Sandbox</h1>
+      <div class="profile-banner">
+        <div class="profile-hero">
+          <div class="profile-avatar-wrap">
+            <div class="avatar-badge-box">
+              <div class="avatar-lg" id="profile-avatar-display">A</div>
+              <button class="edit-avatar-btn" title="Change Avatar" onclick="cycleAvatar()">✏️</button>
+            </div>
+            <div class="profile-titles">
+              <h1 id="user-display-name">Alex Morgan</h1>
+              <div class="profile-meta-tags">
+                <span class="tag-pill tag-vip">👑 VIP Level 3</span>
+                <span class="tag-pill tag-verified">✓ Verified Sandbox</span>
+                <span class="meta-sub">Member since Jan 2026</span>
+              </div>
+            </div>
+          </div>
+          <div class="profile-actions">
+            <button class="btn primary" onclick="saveProfileChanges()">SAVE CHANGES</button>
+          </div>
+        </div>
       </div>
+
       <div class="profile-grid">
-        <div class="panel">
-          <div class="panel-head">Player Information</div>
-          <p style="color: var(--text-muted); margin-bottom: 15px;">Account: Alex Morgan (Verified Sandbox)</p>
-          <button class="btn outline" onclick="refillCredits(10000)">🪙 Reset Balance to 10,000</button>
+        <!-- Left Column: Details & Preferences -->
+        <div>
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Personal Information</h2>
+              <small style="color: var(--text-muted);">Royal ID: #RS-99482</small>
+            </div>
+            <form onsubmit="return false">
+              <div class="form-row">
+                <div class="field-group">
+                  <label for="prof-fname">First Name</label>
+                  <input type="text" id="prof-fname" value="Alex">
+                </div>
+                <div class="field-group">
+                  <label for="prof-lname">Last Name</label>
+                  <input type="text" id="prof-lname" value="Morgan">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="field-group">
+                  <label for="prof-email">Email Address</label>
+                  <input type="email" id="prof-email" value="alex.morgan@royalslot.com">
+                </div>
+                <div class="field-group">
+                  <label for="prof-user">Display Handle</label>
+                  <input type="text" id="prof-user" value="@alex_royal">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="field-group">
+                  <label for="prof-lang">Interface Language</label>
+                  <select id="prof-lang">
+                    <option value="en" selected>English (Global)</option>
+                    <option value="hi">Hindi (हिन्दी)</option>
+                  </select>
+                </div>
+                <div class="field-group">
+                  <label for="prof-tz">Timezone</label>
+                  <select id="prof-tz">
+                    <option value="ist" selected>GMT+05:30 (IST)</option>
+                    <option value="utc">GMT+00:00 (UTC)</option>
+                  </select>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Gameplay Settings</h2>
+              <small style="color: var(--text-muted);">In-game behavior</small>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-label">
+                <h4>Slot Sound Effects & Chimes</h4>
+                <p>Audio playback during reel rotations and winning rounds</p>
+              </div>
+              <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-label">
+                <h4>Turbo Spin Mode</h4>
+                <p>Faster reel animations with shortened delay</p>
+              </div>
+              <label class="switch">
+                <input type="checkbox">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Security & Simulator Controls -->
+        <div>
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Security & Credentials</h2>
+            </div>
+            <div class="field-group">
+              <label for="cur-pass">Current Password</label>
+              <input type="password" id="cur-pass" placeholder="••••••••">
+            </div>
+            <div class="field-group">
+              <label for="new-pass">New Password</label>
+              <input type="password" id="new-pass" placeholder="••••••••">
+            </div>
+            <button class="btn outline" style="width: 100%; margin-top: 6px;" onclick="showToast('Password updated successfully!')">UPDATE PASSWORD</button>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h2 style="color: var(--red-alert);">Simulator Controls</h2>
+            </div>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+              Replenish your test demo wallet or purge local session cache.
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <button class="btn outline" onclick="refillCredits(10000)">🪙 RESET TO 10,000 DEMO CREDITS</button>
+              <button class="btn danger" onclick="clearDemoData()">🗑️ CLEAR LOCAL STORAGE CACHE</button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
